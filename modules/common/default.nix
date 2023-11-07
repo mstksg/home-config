@@ -90,7 +90,12 @@
       # '';
     };
 
-    programs.fzf = { enable = true; };
+    programs.fzf = {
+      enable = true;
+      tmux.enableShellIntegration = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+    };
 
     programs.zsh = {
       enable = true;
@@ -116,6 +121,23 @@
         };
         utility.safeOps = true;
       };
+    };
+
+    programs.bash = {
+      enable = true;
+      shellAliases = { ll = "ls -al"; };
+      historySize = 1000000;
+      historyControl = [ "ignoredups" "ignorespace" ];
+      initExtra = ''
+        set -o vi
+      '';
+    };
+
+    programs.readline = {
+      enable = true;
+      extraConfig = ''
+        set -o vi
+      '';
     };
 
     programs.git = {
