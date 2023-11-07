@@ -72,6 +72,7 @@
       pkgs.sl
       pkgs.uptimed
       pkgs.wget
+      pkgs.jump
     ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
