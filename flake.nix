@@ -10,7 +10,15 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }: {
+  outputs = { nixpkgs, home-manager, self, ... }: {
     common = import ./modules/common;
+    templates = {
+      basic = {
+        path = ./templates/home-manager;
+        description = "Set up home config";
+      };
+    };
+
+    defaultTemplate = self.templates.basic;
   };
 }
