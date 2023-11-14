@@ -88,6 +88,18 @@
       #   org.gradle.console=verbose
       #   org.gradle.daemon.idletimeout=3600000
       # '';
+      ".vim/coc-settings.json".text = ''
+        {
+          "languageserver": {
+            "haskell": {
+              "command": "haskell-language-server-wrapper",
+              "args": ["--lsp"],
+              "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
+              "filetypes": ["haskell", "lhaskell"]
+            }
+          }
+        }
+      ''
     };
 
     programs.fzf = {
