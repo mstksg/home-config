@@ -198,6 +198,8 @@
       defaultEditor = true;
       plugins = with pkgs.vimPlugins; [
         bufexplorer
+        coc-nvim
+        delimitMate
         fzf-vim
         nerdtree
         nerdtree-git-plugin
@@ -208,12 +210,12 @@
         vim-bufferline
         vim-colors-solarized
         vim-commentary
+        vim-cool
         vim-endwise
         vim-eunuch
         vim-fugitive
         vim-gitgutter
         vim-indent-object
-        coc-nvim
         vim-mundo
         vim-repeat
         vim-sensible
@@ -346,7 +348,7 @@
         " nnoremap <space><space> :<C-U>call InsertChar#insert(v:count1)<CR>
         inoremap <F1> <ESC>
         noremap Y y$
-        nnoremap <CR> :nohlsearch<CR>
+        " nnoremap <CR> :nohlsearch<CR>
         nnoremap <c-p> :FZF<CR>
         cabbrev wq w
 
