@@ -305,7 +305,8 @@
         noremap <F1> :BufExplorer<CR>
         " only if pandoc?
         " noremap <F2> :TOC<CR>
-        noremap <F3> :NERDTreeToggle<CR><CR>
+        " noremap <F3> :NERDTreeToggle<CR><CR>
+        nmap <F3> <Cmd>CocCommand explorer<CR>
         noremap <F4> :MundoToggle<CR>
         noremap <F5> :!./%
         noremap <F6> :make<CR>
@@ -496,8 +497,8 @@
         " NOTE: Please see `:h coc-status` for integrations with external plugins that
         " provide custom statusline: lightline.vim, vim-airline
         " set statusline^=%{coc#status()}%{get(b:,'coc_current_function',''')}
-        set g:airline#extensions#coc#enabled = 1
-        set g:airline#extensions#coc#show_coc_status = 1
+        let g:airline#extensions#coc#enabled = 1
+        let g:airline#extensions#coc#show_coc_status = 1
 
         " Mappings for CoCList
         " Show all diagnostics
@@ -516,6 +517,7 @@
         nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
         " Resume latest coc list
         nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+        nnoremap <silent><nowait> <space>e  <Cmd>CocCommand explorer<CR>
       '';
       settings = { background = "dark"; };
     };
