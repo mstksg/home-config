@@ -301,6 +301,8 @@
         noremap! <Home> <Esc>
         noremap  <End> <nop>
         noremap! <End> <Esc>
+        noremap  <CR> <nop>
+        noremap! <CR> <Esc>
         " noremap <Del> <nop>
         " noremap! <Del> <Esc>
         " noremap! <C_Del> <Del>
