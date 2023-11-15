@@ -63,16 +63,17 @@
       pkgs.glances
       pkgs.haskell-language-server
       pkgs.jq
+      pkgs.jump
       pkgs.lolcat
       pkgs.ncdu
       pkgs.nil
       pkgs.nixfmt
+      pkgs.nixpkgs-fmt
       pkgs.nodejs
       pkgs.ripgrep
       pkgs.sl
       pkgs.uptimed
       pkgs.wget
-      pkgs.jump
     ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
