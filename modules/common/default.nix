@@ -99,6 +99,7 @@
             },
             "nix": {
               "command": "nil",
+              "filetypes": ["nix"],
               "rootPatterns": ["flake.nix"],
               "settings": {
                 "nil": {
