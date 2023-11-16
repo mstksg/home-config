@@ -255,6 +255,7 @@
         set nobackup
         set nowritebackup
 
+        set background=dark
         set updatetime=300
 
         " display options
@@ -548,7 +549,7 @@
         nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
         nnoremap <silent><nowait> <space>e  <Cmd>CocCommand explorer<CR>
       '';
-      settings = { background = "dark"; };
+      # settings = { background = "dark"; };
     };
 
     # You can also manage environment variables but you will have to manually
