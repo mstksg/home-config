@@ -275,10 +275,10 @@
         " match ErrorMsg '\%>80v.\+'
         set showbreak =\ ++\ \ \
         set linebreak
-        " colorscheme solarized
         " colorscheme orange-moon
         " colorscheme atom
-        colorscheme sorbet
+        " colorscheme sorbet
+        colorscheme solarized8_low
 
         if version >= 703
           set colorcolumn=+1
