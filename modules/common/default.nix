@@ -275,7 +275,10 @@
         " match ErrorMsg '\%>80v.\+'
         set showbreak =\ ++\ \ \
         set linebreak
-        colorscheme solarized
+        " colorscheme solarized
+        " colorscheme orange-moon
+        " colorscheme atom
+        colorscheme sorbet
 
         if version >= 703
           set colorcolumn=+1
@@ -302,8 +305,8 @@
         noremap! <Home> <Esc>
         noremap  <End> <nop>
         noremap! <End> <Esc>
-        noremap  <CR> <nop>
-        noremap! <CR> <Esc>
+        " noremap  <CR> <nop>
+        " noremap! <CR> <Esc>
         " noremap <Del> <nop>
         " noremap! <Del> <Esc>
         " noremap! <C_Del> <Del>
