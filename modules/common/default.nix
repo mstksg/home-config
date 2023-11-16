@@ -255,7 +255,6 @@
         set nobackup
         set nowritebackup
 
-        set background=dark
         set updatetime=300
 
         " display options
@@ -276,10 +275,10 @@
         " match ErrorMsg '\%>80v.\+'
         set showbreak =\ ++\ \ \
         set linebreak
-        " colorscheme orange-moon
+        colorscheme orange-moon
         " colorscheme atom
         " colorscheme sorbet
-        colorscheme solarized8_low
+        " colorscheme solarized8_low
 
         if version >= 703
           set colorcolumn=+1
@@ -549,7 +548,7 @@
         nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
         nnoremap <silent><nowait> <space>e  <Cmd>CocCommand explorer<CR>
       '';
-      # settings = { background = "dark"; };
+      settings = { background = "dark"; };
     };
 
     # You can also manage environment variables but you will have to manually
