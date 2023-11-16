@@ -220,10 +220,11 @@
       enable = true;
       defaultEditor = true;
       plugins = with pkgs.vimPlugins; [
+        awesome-vim-colorschemes
         bufexplorer
         coc-explorer
-        coc-nvim
         coc-fzf
+        coc-nvim
         delimitMate
         fzf-vim
         syntastic
