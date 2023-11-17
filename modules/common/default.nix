@@ -232,7 +232,6 @@
         tagbar
         vim-airline
         vim-airline-themes
-        vim-colors-solarized
         vim-commentary
         vim-cool
         vim-endwise
@@ -257,6 +256,7 @@
         set nowritebackup
 
         set updatetime=300
+        set t_Co=256
         set termguicolors
 
         " display options
@@ -279,9 +279,9 @@
         set linebreak
         " colorscheme orange-moon
         " colorscheme atom
-        colorscheme sorbet
+        " colorscheme sorbet
         " colorscheme OceanicNext
-        " colorscheme solarized8
+        colorscheme solarized8
 
         if version >= 703
           set colorcolumn=+1
