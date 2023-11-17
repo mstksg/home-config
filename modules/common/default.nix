@@ -226,7 +226,7 @@
       enable = true;
       defaultEditor = true;
       plugins = with pkgs.vimPlugins; [
-        auto-sesion
+        auto-session
         awesome-vim-colorschemes
         bufexplorer
         coc-explorer
