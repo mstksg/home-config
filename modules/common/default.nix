@@ -111,6 +111,9 @@
           }
         }
       '';
+      ".haskeline".text = ''
+        editMode: Vi
+      '';
     };
 
     programs.fzf = {
