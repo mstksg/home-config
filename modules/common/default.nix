@@ -232,6 +232,7 @@
         tagbar
         vim-airline
         vim-airline-themes
+        vim-colors-solarized
         vim-commentary
         vim-cool
         vim-endwise
