@@ -279,8 +279,8 @@
         " colorscheme orange-moon
         " colorscheme atom
         " colorscheme sorbet
-        " colorscheme solarized8_low
         " colorscheme OceanicNext
+        colorscheme solarized8
 
         if version >= 703
           set colorcolumn=+1
