@@ -278,9 +278,9 @@
         set linebreak
         " colorscheme orange-moon
         " colorscheme atom
-        " colorscheme sorbet
+        colorscheme sorbet
         " colorscheme OceanicNext
-        colorscheme solarized8
+        " colorscheme solarized8
 
         if version >= 703
           set colorcolumn=+1
