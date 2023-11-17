@@ -256,6 +256,7 @@
         set nowritebackup
 
         set updatetime=300
+        set termguicolors
 
         " display options
         syntax on
@@ -279,7 +280,7 @@
         " colorscheme atom
         " colorscheme sorbet
         " colorscheme solarized8_low
-        colorscheme OceanicNext
+        " colorscheme OceanicNext
 
         if version >= 703
           set colorcolumn=+1
