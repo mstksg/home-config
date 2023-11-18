@@ -181,7 +181,7 @@
       };
     };
 
-    programs.autojump.enable = true;
+    # programs.autojump.enable = true;
 
     programs.tmux = {
       enable = true;
@@ -193,8 +193,7 @@
       keyMode = "vi";
       aggressiveResize = true;
       historyLimit = 250000;
-      # terminal = "xterm-256color";
-      terminal = "tmux";
+      terminal = "screen-256color";
       extraConfig = ''
         bind | split-window -h -c '#{pane_current_path}'
         bind - split-window -v -c '#{pane_current_path}'
