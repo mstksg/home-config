@@ -193,7 +193,7 @@
       keyMode = "vi";
       aggressiveResize = true;
       historyLimit = 250000;
-      terminal = "screen-256color";
+      terminal = "tmux-256color";
       extraConfig = ''
         bind | split-window -h -c '#{pane_current_path}'
         bind - split-window -v -c '#{pane_current_path}'
