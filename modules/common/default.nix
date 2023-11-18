@@ -218,6 +218,8 @@
 
         setw -g monitor-activity on
         set -g visual-activity on
+
+        set -ga terminal-overrides ',*256col*:Tc'
       '';
     };
 
