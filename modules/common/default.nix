@@ -63,6 +63,7 @@
       pkgs.glances
       pkgs.haskell-language-server
       pkgs.jq
+      pkgs.killall
       pkgs.lolcat
       pkgs.ncdu
       pkgs.nil
