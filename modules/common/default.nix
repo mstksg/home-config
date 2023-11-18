@@ -1,4 +1,4 @@
-{ config, lib, pkgs, system, ... }: {
+{ config, lib, pkgs, ... }: {
   options = {
     user = lib.mkOption {
       type = pkgs.lib.types.str;
@@ -39,7 +39,7 @@
 
     # The home.packages option allows you to install Nix packages into your
     # environment.
-    home.packages = builtins.filter (p: builtins.elem system p.meta.platforms) [
+    home.packages = builtins.filter (p: builtins.elem pkgs.system p.meta.platforms) [
       # # Adds the 'hello' command to your environment. It prints a friendly
       # # "Hello, world!" when run.
       # pkgs.hello
