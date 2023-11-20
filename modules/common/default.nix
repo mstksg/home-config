@@ -183,6 +183,15 @@
       };
     };
 
+    programs.gh = {
+      enable = true;
+      gitCredentialHelper.hosts = [
+        "https://github.com"
+      ];
+    };
+
+    programs.gh-dash.enable = true;
+
     programs.autojump.enable = true;
 
     programs.tmux = {
