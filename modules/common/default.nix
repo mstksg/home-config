@@ -72,6 +72,7 @@
       pkgs.nodejs
       pkgs.ripgrep
       pkgs.sl
+      pkgs.tree
       pkgs.uptimed
       pkgs.wget
     ];
