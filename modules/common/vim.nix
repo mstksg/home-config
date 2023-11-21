@@ -1,5 +1,37 @@
 { pkgs }:
 rec {
+  plugins = with pkgs.vimPlugins; [
+    awesome-vim-colorschemes
+    bufexplorer
+    coc-explorer
+    coc-fzf
+    coc-nvim
+    delimitMate
+    fzf-vim
+    purescript-vim
+    syntastic
+    tagbar
+    utilPlugins.coc-bindings
+    utilPlugins.vimfile-locations
+    vim-airline
+    vim-airline-themes
+    vim-commentary
+    vim-cool
+    vim-endwise
+    vim-eunuch
+    vim-fugitive
+    vim-gitgutter
+    vim-indent-object
+    vim-mundo
+    vim-repeat
+    vim-sensible
+    vim-signature
+    vim-startify
+    vim-surround
+    vim-tmux-navigator
+    vim-unimpaired
+    vim-wordmotion
+  ];
   simplePlugin = name: body: pkgs.vimUtils.buildVimPlugin {
     inherit name;
     src = pkgs.writeTextDir "plugin/${name}.vim" body;
@@ -200,38 +232,6 @@ rec {
 
   vimConfig =
     let
-      plugins = with pkgs.vimPlugins; [
-        auto-session
-        awesome-vim-colorschemes
-        bufexplorer
-        coc-explorer
-        coc-fzf
-        coc-nvim
-        delimitMate
-        fzf-vim
-        syntastic
-        tagbar
-        vim-airline
-        vim-airline-themes
-        vim-commentary
-        vim-cool
-        vim-endwise
-        vim-eunuch
-        vim-fugitive
-        vim-gitgutter
-        vim-indent-object
-        vim-mundo
-        vim-repeat
-        vim-sensible
-        vim-signature
-        vim-startify
-        vim-surround
-        vim-tmux-navigator
-        vim-unimpaired
-        vim-wordmotion
-        utilPlugins.coc-bindings
-        utilPlugins.vimfile-locations
-      ];
       extraConfig = ''
         set encoding=utf-8
 
@@ -391,4 +391,40 @@ rec {
       defaultEditor = true;
       settings = { background = "dark"; };
     };
+  cocSettings = ''
+    {
+      "languageserver": {
+        "haskell": {
+          "command": "haskell-language-server-wrapper",
+          "args": ["--lsp"],
+          "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
+          "filetypes": ["haskell", "lhaskell"]
+        },
+        "nix": {
+          "command": "nil",
+          "filetypes": ["nix"],
+          "rootPatterns": ["flake.nix"],
+          "settings": {
+            "nil": {
+              "formatting": { "command": ["nixpkgs-fmt"] }
+            }
+          }
+        },
+        "purescript": {
+          "command": "purescript-language-server",
+          "args": ["--stdio"],
+          "filetypes": ["purescript"],
+          "trace.server": "off",
+          "rootPatterns": ["bower.json", "psc-package.json", "spago.dhall", "spago.yaml"],
+          "settings": {
+            "purescript": {
+              "addSpagoSources": true,
+              "addNpmPath": true, // Set to true if using a local purty install for formatting
+              "formatter": "purty"
+            }
+          }
+        }
+      }
+    }
+  '';
 }

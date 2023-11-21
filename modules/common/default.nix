@@ -66,7 +66,6 @@ in
         pkgs.cmatrix
         pkgs.fzf
         pkgs.glances
-        pkgs.haskell-language-server
         pkgs.jq
         pkgs.killall
         pkgs.lolcat
@@ -95,31 +94,7 @@ in
         #   org.gradle.console=verbose
         #   org.gradle.daemon.idletimeout=3600000
         # '';
-        ".vim/coc-settings.json".text = ''
-          {
-            "languageserver": {
-              "haskell": {
-                "command": "haskell-language-server-wrapper",
-                "args": ["--lsp"],
-                "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
-                "filetypes": ["haskell", "lhaskell"]
-              },
-              "nix": {
-                "command": "nil",
-                "filetypes": ["nix"],
-                "rootPatterns": ["flake.nix"],
-                "settings": {
-                  "nil": {
-                    "formatting": { "command": ["nixpkgs-fmt"] }
-                  }
-                }
-              }
-            }
-          }
-        '';
-        ".haskeline".text = ''
-          editMode: Vi
-        '';
+        ".vim/coc-settings.json" = vimUtils.cocSettings;
       };
 
       programs.fzf = {
