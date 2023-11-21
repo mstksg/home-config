@@ -11,7 +11,9 @@
   };
 
   outputs = { nixpkgs, home-manager, self, ... }: {
-    common = import ./modules/common;
+    nixosModules = {
+      common = import ./modules/common;
+    };
     templates = {
       basic = {
         path = ./templates/home-manager;
