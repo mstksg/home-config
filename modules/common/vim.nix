@@ -391,7 +391,7 @@ rec {
       defaultEditor = true;
       settings = { background = "dark"; };
     };
-  cocSettings = ''
+  cocSettings.text = ''
     {
       "languageserver": {
         "haskell": {
