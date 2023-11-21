@@ -8,7 +8,7 @@ rec {
     coc-nvim
     delimitMate
     fzf-vim
-    hasekll-vim
+    haskell-vim
     purescript-vim
     syntastic
     tagbar
