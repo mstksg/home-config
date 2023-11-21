@@ -18,12 +18,13 @@
         # user = "";
         # email = "";
       };
-    in {
+    in
+    {
       homeConfigurations.${config.user} =
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
 
-          modules = [ home-config.common { inherit config; } ./home.nix ];
+          modules = [ home-config.nixosModules.common { inherit config; } ./home.nix ];
 
         };
     };
