@@ -378,6 +378,21 @@ rec {
         noremap <leader>tp :tN<CR>
         noremap <leader>ws :%s/\s\+$//<CR>:nohlsearch<CR>
 
+        command! ToggleTabs :setlocal et!
+
+        command! Tabs :setlocal noet sts=8 ts=8 sw=8
+        command! Tabs4 :setlocal noet sts=4 ts=4 sw=4
+        command! FourSpaces :setlocal et sts=4 ts=4 sw=4
+        command! TwoSpaces :setlocal et sts=4 ts=4 sw=2
+
+        function! s:Underline(chars)
+          let chars = empty(a:chars) ? '-' : a:chars
+          let nr_columns = virtcol('$') - 1
+          let uline = repeat(chars, (nr_columns / len(chars)) + 1)
+          put =strpart(uline, 0, nr_columns)
+        endfunction
+        command! -nargs=? Underline call s:Underline(<q-args>)
+
         " plugin options
         let g:airline_theme='solarized'
         let g:airline_solarized_bg = 'dark'
