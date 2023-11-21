@@ -17,8 +17,8 @@
         path = ./templates/home-manager;
         description = "Set up home config";
       };
+      default = self.templates.basic;
     };
 
-    defaultTemplate = self.templates.basic;
   };
 }
