@@ -173,6 +173,9 @@ in
             side-by-side = false;
             line-numbers = true;
             features = "zebra-dark";
+            nested = {
+              test = true;
+            };
           };
         };
         extraConfig = {
