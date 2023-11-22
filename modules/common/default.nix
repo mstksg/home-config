@@ -236,6 +236,8 @@ in
 
       programs.vim = vimUtils.vimConfig;
 
+      services.ssh-agent.enable = true;
+
       # You can also manage environment variables but you will have to manually
       # source
       #
