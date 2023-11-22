@@ -178,7 +178,7 @@ in
             dark = true;
             side-by-side = false;
             line-numbers = true;
-            features = "zebra-dark";
+            features = "chameleon";
           };
           merge.conflictstyle = "diff3";
           diff.colorMoved = "default";
