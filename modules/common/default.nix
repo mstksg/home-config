@@ -64,6 +64,7 @@ in
 
         pkgs.cachix
         pkgs.cmatrix
+        pkgs.delta
         pkgs.fzf
         pkgs.glances
         pkgs.jq
@@ -147,6 +148,13 @@ in
         '';
       };
 
+      programs.bat = {
+        enable = true;
+        config = {
+          theme = "Solarized";
+        };
+      };
+
       programs.git = {
         enable = true;
         userName = "${config.user}";
@@ -159,7 +167,20 @@ in
         };
         extraConfig = {
           init.defaultBranch = "main";
-          core.editor = "vim";
+          core = {
+            editor = "vim";
+            pager = "delta";
+          };
+          interactive.diffFilter = "delta --color-only";
+          delta = {
+            theme = "Solarized";
+            navigate = true;
+            light = false;
+            side-by-side = true;
+            features = "zebra-dark";
+          };
+          merge.conflictstyle = "diff3";
+          diff.colorMoved = "default";
         };
       };
 
