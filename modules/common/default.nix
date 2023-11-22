@@ -151,7 +151,7 @@ in
       programs.bat = {
         enable = true;
         config = {
-          theme = "Solarized";
+          theme = "Solarized (dark)";
         };
       };
 
@@ -173,7 +173,6 @@ in
           };
           interactive.diffFilter = "delta --color-only";
           delta = {
-            theme = "Solarized";
             navigate = true;
             light = false;
             dark = true;
