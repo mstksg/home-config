@@ -176,7 +176,9 @@ in
             theme = "Solarized";
             navigate = true;
             light = false;
-            side-by-side = true;
+            dark = true;
+            side-by-side = false;
+            line-numbers = true;
             features = "zebra-dark";
           };
           merge.conflictstyle = "diff3";
