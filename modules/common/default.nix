@@ -172,7 +172,7 @@ in
             dark = true;
             side-by-side = false;
             line-numbers = true;
-            features = "chameleon";
+            features = "zebra-dark";
           };
         };
         extraConfig = {
