@@ -64,7 +64,6 @@ in
 
         pkgs.cachix
         pkgs.cmatrix
-        pkgs.delta
         pkgs.fzf
         pkgs.glances
         pkgs.jq
@@ -150,9 +149,9 @@ in
 
       programs.bat = {
         enable = true;
-        # config = {
-        #   theme = "Solarized (dark)";
-        # };
+        config = {
+          theme = "Solarized (dark)";
+        };
       };
 
       programs.git = {
@@ -165,14 +164,9 @@ in
             "lg = log --oneline --abbrev-commit --all --graph --decorate --color";
           sha = "rev-parse HEAD";
         };
-        extraConfig = {
-          init.defaultBranch = "main";
-          core = {
-            editor = "vim";
-            pager = "delta";
-          };
-          interactive.diffFilter = "delta --color-only";
-          delta = {
+        delta = {
+          enable = true;
+          options = {
             navigate = true;
             light = false;
             dark = true;
@@ -180,6 +174,10 @@ in
             line-numbers = true;
             features = "chameleon";
           };
+        };
+        extraConfig = {
+          init.defaultBranch = "main";
+          core.editor = "vim";
           merge.conflictstyle = "diff3";
           diff.colorMoved = "default";
         };
