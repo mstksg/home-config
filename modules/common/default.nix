@@ -108,7 +108,14 @@ in
         enable = true;
         # TODO: when these are split out, how about ll when there is no eza
         # aliases
-        # shellAliases = { ll = "ls -al"; };
+        shellAliases = {
+          ls = "eza";
+          ll = "eza -l";
+          la = "eza -a";
+          lt = "eza --tree";
+          lla = "eza -la";
+          # ll = "ls -al";
+        };
         history = { size = 1000000; };
 
         zplug = {
