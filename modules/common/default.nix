@@ -106,7 +106,9 @@ in
 
       programs.zsh = {
         enable = true;
-        shellAliases = { ll = "ls -al"; };
+        # TODO: when these are split out, how about ll when there is no eza
+        # aliases
+        # shellAliases = { ll = "ls -al"; };
         history = { size = 1000000; };
 
         zplug = {
@@ -132,7 +134,9 @@ in
 
       programs.bash = {
         enable = true;
-        shellAliases = { ll = "ls -al"; };
+        # TODO: when these are split out, how about ll when there is no eza
+        # aliases
+        # shellAliases = { ll = "ls -al"; };
         historySize = 1000000;
         historyControl = [ "ignoredups" "ignorespace" ];
         initExtra = ''
