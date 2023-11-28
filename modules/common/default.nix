@@ -214,7 +214,6 @@ in
         enable = true;
         enableAliases = true;
         git = true;
-        icons = true;
       };
 
       programs.gh-dash.enable = true;
