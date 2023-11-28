@@ -79,7 +79,6 @@ in
         pkgs.tree
         pkgs.uptimed
         pkgs.wget
-        pkgs.exa
       ];
 
       # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -107,7 +106,7 @@ in
 
       programs.zsh = {
         enable = true;
-        shellAliases = { ls = "exa"; ll = "ls -al"; };
+        shellAliases = { ll = "ls -al"; };
         history = { size = 1000000; };
 
         zplug = {
@@ -133,7 +132,7 @@ in
 
       programs.bash = {
         enable = true;
-        shellAliases = { ls = "exa"; ll = "ls -al"; };
+        shellAliases = { ll = "ls -al"; };
         historySize = 1000000;
         historyControl = [ "ignoredups" "ignorespace" ];
         initExtra = ''
@@ -153,14 +152,6 @@ in
         # config = {
         #   theme = "Solarized (dark)";
         # };
-        extraPackages = with pkgs.bat-extras; [
-          batdiff
-          batgrep
-          batman
-          batpipe
-          batwatch
-          prettybat
-        ];
       };
 
       programs.git = {
@@ -169,7 +160,8 @@ in
         userEmail = "${config.email}";
         aliases = {
           st = "status";
-          lg = "log --oneline --abbrev-commit --all --graph --decorate --color";
+          lg =
+            "lg = log --oneline --abbrev-commit --all --graph --decorate --color";
           sha = "rev-parse HEAD";
         };
         delta = {
@@ -213,6 +205,13 @@ in
           "https://github.com"
         ];
       };
+
+      programs.eza {
+        enable = true;
+        enableAliases = true;
+        git = true;
+        icons = true;
+      }
 
       programs.gh-dash.enable = true;
 
