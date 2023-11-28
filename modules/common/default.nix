@@ -79,6 +79,7 @@ in
         pkgs.tree
         pkgs.uptimed
         pkgs.wget
+        pkgs.exa
       ];
 
       # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -106,7 +107,7 @@ in
 
       programs.zsh = {
         enable = true;
-        shellAliases = { ll = "ls -al"; };
+        shellAliases = { ls = "exa"; ll = "ls -al"; };
         history = { size = 1000000; };
 
         zplug = {
@@ -132,7 +133,7 @@ in
 
       programs.bash = {
         enable = true;
-        shellAliases = { ll = "ls -al"; };
+        shellAliases = { ls = "exa"; ll = "ls -al"; };
         historySize = 1000000;
         historyControl = [ "ignoredups" "ignorespace" ];
         initExtra = ''
