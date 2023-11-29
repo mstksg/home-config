@@ -201,12 +201,26 @@ let
 in
 {
   config = {
+    home.packages = [
+      (pkgs.writeShellScriptBin "haskell-language-server-wrapper-2" ''
+        if command -v haskell-language-server &> /dev/null
+        then
+          haskell-language-server "$@"
+        elif command -v haskell-language-server-wrapper &> /dev/null
+        then
+          haskell-language-server-wrapper "$@"
+        else
+          echo "Neither haskell-language-server nor haskell-language-server-wrapper found."
+          exit 1
+        fi
+      '')
+    ];
     home.file = {
       ".vim/coc-settings.json".text = ''
         {
           "languageserver": {
             "haskell": {
-              "command": "haskell-language-server-wrapper",
+              "command": "haskell-language-server-wrapper-2",
               "args": ["--lsp"],
               "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
               "filetypes": ["haskell", "lhaskell"]
