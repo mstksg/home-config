@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, ... }:
 let
   simplePlugin = name: body: pkgs.vimUtils.buildVimPlugin {
     inherit name;
