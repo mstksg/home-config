@@ -24,7 +24,11 @@
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
 
-          modules = [ home-config.nixosModules.common { inherit config; } ./home.nix ];
+        modules = [
+          home-config.nixosModules.base { inherit config; }
+          home-config.nixosModules.editing {}
+          ./home.nix
+        ];
 
         };
     };
