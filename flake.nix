@@ -12,7 +12,8 @@
 
   outputs = { nixpkgs, home-manager, self, ... }: {
     nixosModules = {
-      common = import ./modules/common;
+      base = import ./modules/base.nix;
+      editing = import ./modules/editing.nix;
     };
     templates = {
       basic = {
