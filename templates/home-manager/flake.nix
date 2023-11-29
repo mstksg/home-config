@@ -25,8 +25,9 @@
           inherit pkgs;
 
         modules = [
-          home-config.nixosModules.base { inherit config; }
-          home-config.nixosModules.editing {}
+          { inherit config; }
+          home-config.nixosModules.base
+          home-config.nixosModules.editing
           ./home.nix
         ];
 
