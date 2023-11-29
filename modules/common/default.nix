@@ -1,7 +1,4 @@
 { config, lib, pkgs, ... }:
-let
-  vimUtils = (import ./vim.nix) { inherit pkgs; };
-in
 {
   options = {
     user = lib.mkOption {
@@ -94,7 +91,6 @@ in
         #   org.gradle.console=verbose
         #   org.gradle.daemon.idletimeout=3600000
         # '';
-        ".vim/coc-settings.json" = vimUtils.cocSettings;
       };
 
       programs.fzf = {
@@ -108,7 +104,10 @@ in
         enable = true;
         # TODO: when these are split out, how about ll when there is no eza
         # aliases
-        # shellAliases = { ll = "ls -al"; };
+        shellAliases = {
+          # ll = "ls -al";
+          sl = "sl";
+        };
         history = { size = 1000000; };
 
         zplug = {
@@ -136,7 +135,10 @@ in
         enable = true;
         # TODO: when these are split out, how about ll when there is no eza
         # aliases
-        # shellAliases = { ll = "ls -al"; };
+        shellAliases = {
+          # ll = "ls -al";
+          sl = "sl";
+        };
         historySize = 1000000;
         historyControl = [ "ignoredups" "ignorespace" ];
         initExtra = ''
@@ -259,8 +261,6 @@ in
           set -ga terminal-overrides ',*256col*:Tc'
         '';
       };
-
-      programs.vim = vimUtils.vimConfig;
 
       services.ssh-agent.enable = true;
 

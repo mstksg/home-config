@@ -1,38 +1,5 @@
 { pkgs }:
-rec {
-  plugins = with pkgs.vimPlugins; [
-    awesome-vim-colorschemes
-    bufexplorer
-    coc-explorer
-    coc-fzf
-    coc-nvim
-    delimitMate
-    fzf-vim
-    haskell-vim
-    purescript-vim
-    syntastic
-    tagbar
-    utilPlugins.coc-bindings
-    utilPlugins.vimfile-locations
-    vim-airline
-    vim-airline-themes
-    vim-commentary
-    vim-cool
-    vim-endwise
-    vim-eunuch
-    vim-fugitive
-    vim-gitgutter
-    vim-indent-object
-    vim-mundo
-    vim-repeat
-    vim-sensible
-    vim-signature
-    vim-startify
-    vim-surround
-    vim-tmux-navigator
-    vim-unimpaired
-    vim-wordmotion
-  ];
+let
   simplePlugin = name: body: pkgs.vimUtils.buildVimPlugin {
     inherit name;
     src = pkgs.writeTextDir "plugin/${name}.vim" body;
@@ -231,216 +198,253 @@ rec {
     '';
   };
 
-  vimConfig =
-    let
-      extraConfig = ''
-        set encoding=utf-8
-
-        set nobackup
-        set nowritebackup
-
-        set updatetime=300
-        set t_Co=256
-        set termguicolors
-
-        " display options
-        syntax on
-        set ruler
-        set number
-        set scrolloff=5
-        set textwidth=78
-        set signcolumn=yes
-        set showmatch
-        set nowrap
-        set foldlevelstart=20
-        set foldcolumn=1
-        set foldmethod=syntax
-        set t_Co=256
-        set showcmd
-        autocmd InsertEnter,InsertLeave * set cul!
-        " match ErrorMsg '\%>80v.\+'
-        set showbreak =\ ++\ \ \
-        set linebreak
-        " colorscheme orange-moon
-        " colorscheme atom
-        " colorscheme sorbet
-        " colorscheme OceanicNext
-        colorscheme solarized8
-
-        if version >= 703
-          set colorcolumn=+1
-        endif
-
-        set wildignore=*.o,*.swp,*.class,*.aux,*.dump-hi
-
-        " keyboard options
-        set expandtab
-        set shiftwidth=2
-        set softtabstop=2
-        set tabstop=2
-        set backspace=indent,eol,start
-        set autoindent
-        noremap  <Up> <nop>
-        noremap! <Up> <Esc>
-        noremap  <Down> <nop>
-        noremap! <Down> <Esc>
-        noremap  <Left> <nop>
-        noremap! <Left> <Esc>
-        noremap  <Right> <nop>
-        noremap! <Right> <Esc>
-        noremap  <Home> <nop>
-        noremap! <Home> <Esc>
-        noremap  <End> <nop>
-        noremap! <End> <Esc>
-        " noremap  <CR> <nop>
-        " noremap! <CR> <Esc>
-        " noremap <Del> <nop>
-        " noremap! <Del> <Esc>
-        " noremap! <C_Del> <Del>
-        nnoremap Q <nop>
-        nnoremap K <nop>
-
-        " commands
-
-        " search options
-        set ignorecase
-        set smartcase
-        set incsearch
-        set hlsearch
-        set showmatch
-
-        " file options
-        set autoread
-        set hidden
-        set history=1000
-        set wildmenu
-        set wildmode=list:longest,full
-        set confirm
-
-        " shortcuts
-        noremap <F1> :BufExplorer<CR>
-        " only if pandoc?
-        " noremap <F2> :TOC<CR>
-        " noremap <F3> :NERDTreeToggle<CR><CR>
-        nmap <F3> <Cmd>CocCommand explorer<CR>
-        noremap <F4> :MundoToggle<CR>
-        noremap <F5> :!./%
-        noremap <F6> :make<CR>
-        noremap <F7> :setlocal spell! spelllang=en_us<CR>
-        noremap <F8> :TagbarToggle<CR>
-        " noremap <F9> :SignifyToggle<CR>
-        noremap <F9> :GitGutterToggle<CR>
-        noremap <F10> :SignatureToggle<CR>
-        noremap <F11> :set list!<CR>:set list?<CR>
-        noremap <F12> :set cursorline!<CR>:set cursorcolumn!<CR>
-        " noremap <F12> :ls<CR>:b<SPACE>
-        " autocmd CmdwinEnter * nnoremap <buffer> <cr> <cr>
-        " autocmd FileType qf nnoremap <buffer> <cr> <cr>
-        " noremap <leader>ev :e! ~/.vimrc<CR>
-        noremap <leader>twr :normal gqip<CR>
-        " noremap <leader>todo :vsp! ~/todo.txt<CR>
-        " vmap <leader>sl "ry:call Send_to_Tmux(@r)<CR>
-        " nmap <leader>sl vip<leader>sl
-        " nmap <leader>p <A-p>
-        " nmap <leader>P <A-P>
-        " nmap <leader>p <Plug>yankstack_substitute_older_paste
-        " nmap <leader>P <Plug>yankstack_substitute_newer_paste
-        " noremap <leader>ys :Yanks<CR>
-        " noremap <leader>so :so %<CR>
-        noremap <leader>1 :b1<CR>
-        noremap <leader>2 :b2<CR>
-        noremap <leader>3 :b3<CR>
-        noremap <leader>4 :b4<CR>
-        noremap <leader>5 :b5<CR>
-        noremap <leader>6 :b6<CR>
-        noremap <leader>7 :b7<CR>
-        noremap <leader>8 :b8<CR>
-        noremap <leader>9 :b9<CR>
-        noremap <leader>0 :b10<CR>
-        noremap <leader>- :confirm bd<CR>
-        noremap <leader>` :ls<CR>:b<SPACE>
-        noremap <leader>ww :w<CR>
-        noremap <leader>sp :set paste!<CR>:set paste?<CR>
-        noremap <leader>be :BufExplorer<CR>
-        " noremap <leader>bj :bn<CR>
-        " noremap <leader>bk :bp<CR>
-        " noremap <leader>wh :wincmd h<CR>
-        " noremap <leader>wj :wincmd j<CR>
-        " noremap <leader>wk :wincmd k<CR>
-        " noremap <leader>wl :wincmd l<CR>
-        " nnoremap <space><space> :<C-U>call InsertChar#insert(v:count1)<CR>
-        inoremap <F1> <ESC>
-        noremap Y y$
-        " nnoremap <CR> :nohlsearch<CR>
-        nnoremap <c-p> :FZF<CR>
-        cabbrev wq w
-
-        noremap <leader>tt :tn<CR>
-        noremap <leader>tp :tN<CR>
-        noremap <leader>ws :%s/\s\+$//<CR>:nohlsearch<CR>
-
-        command! ToggleTabs :setlocal et!
-
-        command! Tabs :setlocal noet sts=8 ts=8 sw=8
-        command! Tabs4 :setlocal noet sts=4 ts=4 sw=4
-        command! FourSpaces :setlocal et sts=4 ts=4 sw=4
-        command! TwoSpaces :setlocal et sts=4 ts=4 sw=2
-
-        function! s:Underline(chars)
-          let chars = empty(a:chars) ? '-' : a:chars
-          let nr_columns = virtcol('$') - 1
-          let uline = repeat(chars, (nr_columns / len(chars)) + 1)
-          put =strpart(uline, 0, nr_columns)
-        endfunction
-        command! -nargs=? Underline call s:Underline(<q-args>)
-
-        " plugin options
-        let g:airline_theme='solarized'
-        let g:airline_solarized_bg = 'dark'
-        let g:airline_detect_whitespace = 2
-        let g:airline_powerline_fonts = 0
-      '';
-    in
-    {
-      inherit extraConfig plugins;
-      enable = true;
-      defaultEditor = true;
-      settings = { background = "dark"; };
-    };
-  cocSettings.text = ''
-    {
-      "languageserver": {
-        "haskell": {
-          "command": "haskell-language-server-wrapper",
-          "args": ["--lsp"],
-          "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
-          "filetypes": ["haskell", "lhaskell"]
-        },
-        "nix": {
-          "command": "nil",
-          "filetypes": ["nix"],
-          "rootPatterns": ["flake.nix"],
-          "settings": {
-            "nil": {
-              "formatting": { "command": ["nixpkgs-fmt"] }
-            }
-          }
-        },
-        "purescript": {
-          "command": "purescript-language-server",
-          "args": ["--stdio"],
-          "filetypes": ["purescript"],
-          "trace.server": "off",
-          "rootPatterns": ["bower.json", "psc-package.json", "spago.dhall", "spago.yaml"],
-          "settings": {
+in
+{
+  config = {
+    home.file = {
+      ".vim/coc-settings.json".text = ''
+        {
+          "languageserver": {
+            "haskell": {
+              "command": "haskell-language-server-wrapper",
+              "args": ["--lsp"],
+              "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
+              "filetypes": ["haskell", "lhaskell"]
+            },
+            "nix": {
+              "command": "nil",
+              "filetypes": ["nix"],
+              "rootPatterns": ["flake.nix"],
+              "settings": {
+                "nil": {
+                  "formatting": { "command": ["nixpkgs-fmt"] }
+                }
+              }
+            },
             "purescript": {
-              "addSpagoSources": true,
-              "addNpmPath": true, // Set to true if using a local purty install for formatting
-              "formatter": "purty"
+              "command": "purescript-language-server",
+              "args": ["--stdio"],
+              "filetypes": ["purescript"],
+              "trace.server": "off",
+              "rootPatterns": ["bower.json", "psc-package.json", "spago.dhall", "spago.yaml"],
+              "settings": {
+                "purescript": {
+                  "addSpagoSources": true,
+                  "addNpmPath": true, // Set to true if using a local purty install for formatting
+                  "formatter": "purty"
+                }
+              }
             }
           }
         }
-      }
-    }
-  '';
+      '';
+    };
+    programs.vim =
+      {
+        enable = true;
+        defaultEditor = true;
+        settings = { background = "dark"; };
+        plugins = with pkgs.vimPlugins; [
+          awesome-vim-colorschemes
+          bufexplorer
+          coc-explorer
+          coc-fzf
+          coc-nvim
+          delimitMate
+          fzf-vim
+          haskell-vim
+          purescript-vim
+          syntastic
+          tagbar
+          utilPlugins.coc-bindings
+          utilPlugins.vimfile-locations
+          vim-airline
+          vim-airline-themes
+          vim-commentary
+          vim-cool
+          vim-endwise
+          vim-eunuch
+          vim-fugitive
+          vim-gitgutter
+          vim-indent-object
+          vim-mundo
+          vim-repeat
+          vim-sensible
+          vim-signature
+          vim-startify
+          vim-surround
+          vim-tmux-navigator
+          vim-unimpaired
+          vim-wordmotion
+        ];
+        extraConfig = ''
+          set encoding=utf-8
+
+          set nobackup
+          set nowritebackup
+
+          set updatetime=300
+          set t_Co=256
+          set termguicolors
+
+          " display options
+          syntax on
+          set ruler
+          set number
+          set scrolloff=5
+          set textwidth=78
+          set signcolumn=yes
+          set showmatch
+          set nowrap
+          set foldlevelstart=20
+          set foldcolumn=1
+          set foldmethod=syntax
+          set t_Co=256
+          set showcmd
+          autocmd InsertEnter,InsertLeave * set cul!
+          " match ErrorMsg '\%>80v.\+'
+          set showbreak =\ ++\ \ \
+          set linebreak
+          " colorscheme orange-moon
+          " colorscheme atom
+          " colorscheme sorbet
+          " colorscheme OceanicNext
+          colorscheme solarized8
+
+          if version >= 703
+            set colorcolumn=+1
+          endif
+
+          set wildignore=*.o,*.swp,*.class,*.aux,*.dump-hi
+
+          " keyboard options
+          set expandtab
+          set shiftwidth=2
+          set softtabstop=2
+          set tabstop=2
+          set backspace=indent,eol,start
+          set autoindent
+          noremap  <Up> <nop>
+          noremap! <Up> <Esc>
+          noremap  <Down> <nop>
+          noremap! <Down> <Esc>
+          noremap  <Left> <nop>
+          noremap! <Left> <Esc>
+          noremap  <Right> <nop>
+          noremap! <Right> <Esc>
+          noremap  <Home> <nop>
+          noremap! <Home> <Esc>
+          noremap  <End> <nop>
+          noremap! <End> <Esc>
+          " noremap  <CR> <nop>
+          " noremap! <CR> <Esc>
+          " noremap <Del> <nop>
+          " noremap! <Del> <Esc>
+          " noremap! <C_Del> <Del>
+          nnoremap Q <nop>
+          nnoremap K <nop>
+
+          " commands
+
+          " search options
+          set ignorecase
+          set smartcase
+          set incsearch
+          set hlsearch
+          set showmatch
+
+          " file options
+          set autoread
+          set hidden
+          set history=1000
+          set wildmenu
+          set wildmode=list:longest,full
+          set confirm
+
+          " shortcuts
+          noremap <F1> :BufExplorer<CR>
+          " only if pandoc?
+          " noremap <F2> :TOC<CR>
+          " noremap <F3> :NERDTreeToggle<CR><CR>
+          nmap <F3> <Cmd>CocCommand explorer<CR>
+          noremap <F4> :MundoToggle<CR>
+          noremap <F5> :!./%
+          noremap <F6> :make<CR>
+          noremap <F7> :setlocal spell! spelllang=en_us<CR>
+          noremap <F8> :TagbarToggle<CR>
+          " noremap <F9> :SignifyToggle<CR>
+          noremap <F9> :GitGutterToggle<CR>
+          noremap <F10> :SignatureToggle<CR>
+          noremap <F11> :set list!<CR>:set list?<CR>
+          noremap <F12> :set cursorline!<CR>:set cursorcolumn!<CR>
+          " noremap <F12> :ls<CR>:b<SPACE>
+          " autocmd CmdwinEnter * nnoremap <buffer> <cr> <cr>
+          " autocmd FileType qf nnoremap <buffer> <cr> <cr>
+          " noremap <leader>ev :e! ~/.vimrc<CR>
+          noremap <leader>twr :normal gqip<CR>
+          " noremap <leader>todo :vsp! ~/todo.txt<CR>
+          " vmap <leader>sl "ry:call Send_to_Tmux(@r)<CR>
+          " nmap <leader>sl vip<leader>sl
+          " nmap <leader>p <A-p>
+          " nmap <leader>P <A-P>
+          " nmap <leader>p <Plug>yankstack_substitute_older_paste
+          " nmap <leader>P <Plug>yankstack_substitute_newer_paste
+          " noremap <leader>ys :Yanks<CR>
+          " noremap <leader>so :so %<CR>
+          noremap <leader>1 :b1<CR>
+          noremap <leader>2 :b2<CR>
+          noremap <leader>3 :b3<CR>
+          noremap <leader>4 :b4<CR>
+          noremap <leader>5 :b5<CR>
+          noremap <leader>6 :b6<CR>
+          noremap <leader>7 :b7<CR>
+          noremap <leader>8 :b8<CR>
+          noremap <leader>9 :b9<CR>
+          noremap <leader>0 :b10<CR>
+          noremap <leader>- :confirm bd<CR>
+          noremap <leader>` :ls<CR>:b<SPACE>
+          noremap <leader>ww :w<CR>
+          noremap <leader>sp :set paste!<CR>:set paste?<CR>
+          noremap <leader>be :BufExplorer<CR>
+          " noremap <leader>bj :bn<CR>
+          " noremap <leader>bk :bp<CR>
+          " noremap <leader>wh :wincmd h<CR>
+          " noremap <leader>wj :wincmd j<CR>
+          " noremap <leader>wk :wincmd k<CR>
+          " noremap <leader>wl :wincmd l<CR>
+          " nnoremap <space><space> :<C-U>call InsertChar#insert(v:count1)<CR>
+          inoremap <F1> <ESC>
+          noremap Y y$
+          " nnoremap <CR> :nohlsearch<CR>
+          nnoremap <c-p> :FZF<CR>
+          cabbrev wq w
+
+          noremap <leader>tt :tn<CR>
+          noremap <leader>tp :tN<CR>
+          noremap <leader>ws :%s/\s\+$//<CR>:nohlsearch<CR>
+
+          command! ToggleTabs :setlocal et!
+
+          command! Tabs :setlocal noet sts=8 ts=8 sw=8
+          command! Tabs4 :setlocal noet sts=4 ts=4 sw=4
+          command! FourSpaces :setlocal et sts=4 ts=4 sw=4
+          command! TwoSpaces :setlocal et sts=4 ts=4 sw=2
+
+          function! s:Underline(chars)
+            let chars = empty(a:chars) ? '-' : a:chars
+            let nr_columns = virtcol('$') - 1
+            let uline = repeat(chars, (nr_columns / len(chars)) + 1)
+            put =strpart(uline, 0, nr_columns)
+          endfunction
+          command! -nargs=? Underline call s:Underline(<q-args>)
+
+          " plugin options
+          let g:airline_theme='solarized'
+          let g:airline_solarized_bg = 'dark'
+          let g:airline_detect_whitespace = 2
+          let g:airline_powerline_fonts = 0
+        '';
+      };
+
+  };
 }
