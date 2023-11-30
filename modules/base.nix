@@ -21,6 +21,11 @@
       else
         "/home/${config.user}");
     };
+    autoTmux = lib.mkOption {
+      type = lib.types.bool;
+      description = "Whether or not to automatically enter a persistent tmux session on a new shell. set $NO_TMUX to bypass";
+      default = false;
+    };
   };
 
   config =
@@ -118,10 +123,10 @@
         prezto = {
           enable = true;
           ssh.identities = [ "id_ed25519" ];
-          # tmux = {
-          #   autoStartRemote = true;
+          tmux = {
+            autoStartRemote = true;
           #   itermIntegration = true;
-          # };
+          };
           prompt = {
             pwdLength = "short";
             showReturnVal = true;
@@ -234,6 +239,11 @@
         historyLimit = 250000;
         terminal = "xterm-256color";
         shell = "${pkgs.zsh}/bin/zsh";
+        tmuxp.enable = true;
+        plugins = with pkgs.tmuxPlugins; [
+          fuzzback
+          sysstat
+        ];
         extraConfig = ''
           bind | split-window -h -c '#{pane_current_path}'
           bind - split-window -v -c '#{pane_current_path}'
@@ -251,7 +261,7 @@
           set -g status-bg black
           set -g status-fg white
           set -g status-left ""
-          set -g status-right "#[fg=green]#H #[fg=default]| #[fg=cyan]%b %d %R"
+          set -g status-right "#{sysstat_cpu} | #{sysstat_mem} | #{sysstat_swap} | #{sysstat_loadavg} | #[fg=cyan]#(echo $USER)#[default]@#H"
 
           set-window-option -g window-status-style dim
           set-window-option -g window-status-current-style bright
