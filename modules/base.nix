@@ -226,13 +226,14 @@
         enable = true;
         prefix = "C-a";
         baseIndex = 0;
-        newSession = true;
+        newSession = false;
         escapeTime = 0;
         secureSocket = false;
         keyMode = "vi";
         aggressiveResize = true;
         historyLimit = 250000;
         terminal = "xterm-256color";
+        defaultShell = "${pkgs.zsh}/bin/zsh";
         extraConfig = ''
           bind | split-window -h -c '#{pane_current_path}'
           bind - split-window -v -c '#{pane_current_path}'
