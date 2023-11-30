@@ -233,7 +233,7 @@
         aggressiveResize = true;
         historyLimit = 250000;
         terminal = "xterm-256color";
-        defaultShell = "${pkgs.zsh}/bin/zsh";
+        shell = "${pkgs.zsh}/bin/zsh";
         extraConfig = ''
           bind | split-window -h -c '#{pane_current_path}'
           bind - split-window -v -c '#{pane_current_path}'
