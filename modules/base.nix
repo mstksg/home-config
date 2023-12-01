@@ -136,7 +136,6 @@
 
       programs.zsh = {
         enable = true;
-        shellAliases = { sl = "sl"; };
         history = { size = 1000000; };
 
         zplug = {
@@ -164,7 +163,13 @@
 
       programs.fish = {
         enable = true;
-        shellAliases = { sl = "sl"; };
+        shellInit = ''
+          fish_vi_key_bindings
+          # fish_config theme choose "Solarized Dark"
+          if not set -q NO_TMUX
+            tmuxp-default
+          end
+        '';
       };
 
       programs.bash = {
