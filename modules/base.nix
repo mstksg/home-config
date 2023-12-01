@@ -113,7 +113,7 @@
           - window_name: hello
             focus: true
             panes:
-            - 
+            - cmatrix -ab
         '';
       };
 
