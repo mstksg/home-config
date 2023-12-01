@@ -277,7 +277,7 @@
         aggressiveResize = true;
         historyLimit = 250000;
         terminal = "xterm-256color";
-        shell = "${pkgs.zsh}/bin/zsh";
+        shell = "${pkgs.fish}/bin/fish";
         tmuxp.enable = true;
         plugins = with pkgs.tmuxPlugins; [
           fuzzback
