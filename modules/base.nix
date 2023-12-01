@@ -165,6 +165,7 @@
         enable = true;
         shellInit = ''
           fish_vi_key_bindings
+          set fish_greeting
           # fish_config theme choose "Solarized Dark"
           if not set -q NO_TMUX
             tmuxp-default
