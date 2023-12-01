@@ -110,7 +110,7 @@
             layout: tiled
             panes:
             - glances
-          - window_name:
+          - window_name: hello
             focus: true
             panes:
             - 
@@ -158,7 +158,7 @@
 
         initExtraFirst = ''
           ${lib.strings.optionalString config.autoTmux
-            "[[ -z $NO_TMUX ]] && tmuxp load --yes default"
+            "[[ -z $NO_TMUX ]] && [[ -z $TMUX ]] && tmuxp load --yes default"
           }
         '';
       };
@@ -177,7 +177,7 @@
           set -o vi
 
           ${lib.strings.optionalString config.autoTmux
-            "[[ -z $NO_TMUX ]] && tmuxp load --yes default"
+            "[[ -z $NO_TMUX ]] && [[ -z $TMUX ]] && tmuxp load --yes default"
           }
         '';
       };
