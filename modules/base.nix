@@ -83,6 +83,7 @@
         pkgs.nixpkgs-fmt
         pkgs.nodejs
         pkgs.ripgrep
+        pkgs.rogue
         pkgs.sl
         pkgs.tree
         pkgs.uptimed
@@ -131,18 +132,11 @@
       programs.fzf = {
         enable = true;
         tmux.enableShellIntegration = true;
-        enableBashIntegration = true;
-        enableZshIntegration = true;
       };
 
       programs.zsh = {
         enable = true;
-        # TODO: when these are split out, how about ll when there is no eza
-        # aliases
-        shellAliases = {
-          # ll = "ls -al";
-          sl = "sl";
-        };
+        shellAliases = { sl = "sl"; };
         history = { size = 1000000; };
 
         zplug = {
@@ -153,12 +147,6 @@
         prezto = {
           enable = true;
           ssh.identities = [ "id_ed25519" ];
-          # tmux = {
-          #   autoStartRemote = true;
-          #   autoStartLocal = true;
-          #   itermIntegration = true;
-          #   defaultSessionName = "__PREZTO__";
-          # };
           prompt = {
             pwdLength = "short";
             showReturnVal = true;
@@ -174,14 +162,14 @@
         '';
       };
 
+      programs.fish = {
+        enable = true;
+        shellAliases = { sl = "sl"; };
+      };
+
       programs.bash = {
         enable = true;
-        # TODO: when these are split out, how about ll when there is no eza
-        # aliases
-        shellAliases = {
-          # ll = "ls -al";
-          sl = "sl";
-        };
+        shellAliases = { sl = "sl"; };
         historySize = 1000000;
         historyControl = [ "ignoredups" "ignorespace" ];
         initExtra = ''
