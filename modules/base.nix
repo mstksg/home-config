@@ -87,6 +87,10 @@
         pkgs.tree
         pkgs.uptimed
         pkgs.wget
+
+        (pkgs.writeShellScriptBin "tmuxp-default" ''
+          [[ -z $NO_TMUX ]] && [[ -z $TMUX ]] && tmuxp load --yes default
+        '')
       ];
 
       # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -110,7 +114,7 @@
             layout: tiled
             panes:
             - glances
-          - window_name: hello
+          - window_name: welcome
             focus: true
             panes:
             - cmatrix -ab
@@ -157,9 +161,9 @@
         };
 
         initExtraFirst = ''
-          ${lib.strings.optionalString config.autoTmux
-            "[[ -z $NO_TMUX ]] && [[ -z $TMUX ]] && tmuxp load --yes default"
-          }
+          ${lib.strings.optionalString config.autoTmux ''
+            [[ -z $NO_TMUX ]] && tmuxp-default
+          ''}
         '';
       };
 
@@ -176,9 +180,9 @@
         initExtra = ''
           set -o vi
 
-          ${lib.strings.optionalString config.autoTmux
-            "[[ -z $NO_TMUX ]] && [[ -z $TMUX ]] && tmuxp load --yes default"
-          }
+          ${lib.strings.optionalString config.autoTmux ''
+            [[ -z $NO_TMUX ]] && tmuxp-default
+          ''}
         '';
       };
 
