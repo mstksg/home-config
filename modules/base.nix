@@ -27,7 +27,7 @@
       default = false;
     };
     gpgSignKey = lib.mkOption {
-      type = lib.types.string;
+      type = lib.types.str;
       description = "Require gpg signing for this key (email) for git and other relevant places.";
       default = null;
     };
@@ -211,7 +211,6 @@
         enable = true;
         userName = config.user;
         userEmail = config.email;
-        signingkey = config.gpgSignKey;
         signing = {
           key = config.gpgSignKey;
           signByDefault = config.gpgSignKey != null;
