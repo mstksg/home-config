@@ -253,14 +253,6 @@ in
                 }
               }
             }
-            "pandoc": {
-              "settings": {
-                "purescript": {
-                  "addSpagoSources": true,
-                  "addNpmPath": true, // Set to true if using a local purty install for formatting
-                  "formatter": "purty"
-                }
-              }
           }
         }
       '';
