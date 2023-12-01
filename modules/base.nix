@@ -319,6 +319,8 @@
       };
 
       services.ssh-agent.enable = true;
+      services.gpg.enable = true;
+      services.gpg-agent.enable = true;
 
       # You can also manage environment variables but you will have to manually
       # source
