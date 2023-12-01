@@ -282,6 +282,9 @@ in
           vim-gitgutter
           vim-indent-object
           vim-mundo
+          vim-pandoc
+          vim-pandoc-after
+          vim-pandoc-syntax
           vim-repeat
           vim-sensible
           vim-signature
