@@ -320,8 +320,8 @@
       services.gpg-agent = {
         enable = true;
         enableSshSupport = true;
-        defaultCacheTtl = 3600;
-        defaultCacheTtlSsh = 3600;
+        defaultCacheTtl = 7200;
+        defaultCacheTtlSsh = 7200;
       };
 
       # You can also manage environment variables but you will have to manually
