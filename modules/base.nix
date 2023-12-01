@@ -169,7 +169,7 @@
 
       programs.bash = {
         enable = true;
-        shellAliases = { sl = "sl"; };
+        shellAliases = { };
         historySize = 1000000;
         historyControl = [ "ignoredups" "ignorespace" ];
         initExtra = ''
