@@ -173,7 +173,7 @@
           set -o vi
 
           ${lib.strings.optionalString config.autoTmux
-            "tmuxp --yes default"
+            "tmuxp load --yes default.yaml"
           }
         '';
       };
