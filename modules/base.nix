@@ -106,10 +106,14 @@
         ".config/tmuxp/default.yaml".text = ''
           session_name: default
           windows:
-            - window_name: htop
-              layout: tiled
-              panes: glances
-            - {}
+          - window_name: htop
+            layout: tiled
+            panes:
+            - glances
+          - window_name:
+            focus: true
+            panes:
+            - 
         '';
       };
 
@@ -154,7 +158,7 @@
 
         initExtraFirst = ''
           ${lib.strings.optionalString config.autoTmux
-            "tmuxp --yes default"
+            "[[ -z $NO_TMUX ]] && tmuxp load --yes default"
           }
         '';
       };
@@ -173,7 +177,7 @@
           set -o vi
 
           ${lib.strings.optionalString config.autoTmux
-            "tmuxp load --yes default.yaml"
+            "[[ -z $NO_TMUX ]] && tmuxp load --yes default"
           }
         '';
       };
