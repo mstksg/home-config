@@ -87,7 +87,8 @@
         pkgs.tree
         pkgs.uptimed
         pkgs.wget
-
+      ] ++
+      [
         (pkgs.writeShellScriptBin "tmuxp-default" ''
           [[ -z $NO_TMUX ]] && [[ -z $TMUX ]] && tmuxp load --yes default
         '')

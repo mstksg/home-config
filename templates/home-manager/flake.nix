@@ -17,6 +17,8 @@
       config = {
         # user = "";
         # email = "";
+        autoTmux = false;
+        gpgSign = false;
       };
     in
     {
