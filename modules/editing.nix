@@ -259,6 +259,7 @@ in
         defaultEditor = true;
         settings = { background = "dark"; };
         plugins = with pkgs.vimPlugins; [
+          NrrwRgn
           awesome-vim-colorschemes
           bufexplorer
           coc-explorer
