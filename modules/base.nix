@@ -120,6 +120,12 @@
             panes:
             - cmatrix -ab
         '';
+
+        ".haskeline".text = ''
+          maxHistorySize: Nothing
+          historyDuplicates: IgnoreConsecutive
+          editMode: Vi
+        '';
       };
 
       programs.fzf = {
