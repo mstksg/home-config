@@ -26,11 +26,10 @@
       description = "Whether or not to automatically enter a persistent tmux session on a new shell. set $NO_TMUX to bypass";
       default = false;
     };
-    # TODO: set up gpg automatically?
-    gpgSign = lib.mkOption {
-      type = lib.types.bool;
-      description = "To require gpg signing for git and other relevant places";
-      default = false;
+    gpgSignKey = lib.mkOption {
+      type = lib.types.string;
+      description = "Require gpg signing for this key (email) for git and other relevant places.";
+      default = null;
     };
   };
 
@@ -70,6 +69,7 @@
         #   echo "Hello, ${config.home.username}!"
         # '')
 
+        pkgs.binutils
         pkgs.cachix
         pkgs.cmatrix
         pkgs.fzf
@@ -209,8 +209,13 @@
 
       programs.git = {
         enable = true;
-        userName = "${config.user}";
-        userEmail = "${config.email}";
+        userName = config.user;
+        userEmail = config.email;
+        signingkey = config.gpgSignKey;
+        signing = {
+          key = config.gpgSignKey;
+          signByDefault = config.gpgSignKey != null;
+        };
         aliases = {
           st = "status";
           lg =
@@ -249,8 +254,6 @@
           core.editor = "vim";
           merge.conflictstyle = "diff3";
           diff.colorMoved = "default";
-          commit.gpgSign = config.gpgSign;
-          tag.gpgSign = config.gpgSign;
         };
       };
 
