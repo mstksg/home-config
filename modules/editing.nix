@@ -195,6 +195,10 @@ let
       " Resume latest coc list
       nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
       nnoremap <silent><nowait> <space>e  <Cmd>CocCommand explorer<CR>
+
+      " by filetype
+      autocmd FileType markdown let b:coc_suggest_disable = 1
+      autocmd FileType pandoc let b:coc_suggest_disable = 1
     '';
   };
 
@@ -249,6 +253,14 @@ in
                 }
               }
             }
+            "pandoc": {
+              "settings": {
+                "purescript": {
+                  "addSpagoSources": true,
+                  "addNpmPath": true, // Set to true if using a local purty install for formatting
+                  "formatter": "purty"
+                }
+              }
           }
         }
       '';
