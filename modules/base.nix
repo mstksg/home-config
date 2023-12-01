@@ -26,6 +26,12 @@
       description = "Whether or not to automatically enter a persistent tmux session on a new shell. set $NO_TMUX to bypass";
       default = false;
     };
+    # TODO: set up gpg automatically?
+    gpgSign = lib.mkOption {
+      type = lib.types.bool;
+      description = "To require gpg signing for git and other relevant places";
+      default = false;
+    };
   };
 
   config =
@@ -96,6 +102,15 @@
         #   org.gradle.console=verbose
         #   org.gradle.daemon.idletimeout=3600000
         # '';
+
+        ".config/tmuxp/default.yaml".text = ''
+          session_name: default
+          windows:
+            - window_name: htop
+              layout: tiled
+              panes: glances
+            - {}
+        '';
       };
 
       programs.fzf = {
@@ -123,12 +138,12 @@
         prezto = {
           enable = true;
           ssh.identities = [ "id_ed25519" ];
-          tmux = {
-            autoStartRemote = true;
-            autoStartLocal = true;
-            itermIntegration = true;
-            defaultSessionName = "__PREZTO__";
-          };
+          # tmux = {
+          #   autoStartRemote = true;
+          #   autoStartLocal = true;
+          #   itermIntegration = true;
+          #   defaultSessionName = "__PREZTO__";
+          # };
           prompt = {
             pwdLength = "short";
             showReturnVal = true;
@@ -136,6 +151,12 @@
           };
           utility.safeOps = true;
         };
+
+        initExtraFirst = ''
+          ${lib.strings.optionalString config.autoTmux
+            "tmuxp --yes default"
+          }
+        '';
       };
 
       programs.bash = {
@@ -150,6 +171,10 @@
         historyControl = [ "ignoredups" "ignorespace" ];
         initExtra = ''
           set -o vi
+
+          ${lib.strings.optionalString config.autoTmux
+            "tmuxp --yes default"
+          }
         '';
       };
 
@@ -209,6 +234,8 @@
           core.editor = "vim";
           merge.conflictstyle = "diff3";
           diff.colorMoved = "default";
+          commit.gpgSign = config.gpgSign;
+          tag.gpgSign = config.gpgSign;
         };
       };
 
@@ -244,7 +271,7 @@
         tmuxp.enable = true;
         plugins = with pkgs.tmuxPlugins; [
           fuzzback
-          sysstat
+          # cpu
         ];
         extraConfig = ''
           bind | split-window -h -c '#{pane_current_path}'
@@ -263,7 +290,8 @@
           set -g status-bg black
           set -g status-fg white
           set -g status-left ""
-          set -g status-right "#{sysstat_cpu} | #{sysstat_mem} | #{sysstat_swap} | #{sysstat_loadavg} | #[fg=cyan]#(echo $USER)#[default]@#H"
+          # set -g status-right "#{sysstat_cpu} | #{sysstat_mem} | #{sysstat_swap} | #{sysstat_loadavg} | #[fg=cyan]#(echo $USER)#[default]@#H"
+          set -g status-right "#[fg=green]#H #[fg=default]| #[fg=cyan]%b %d %R"
 
           set-window-option -g window-status-style dim
           set-window-option -g window-status-current-style bright
