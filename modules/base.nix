@@ -325,6 +325,7 @@
         enableSshSupport = true;
         defaultCacheTtl = 7200;
         defaultCacheTtlSsh = 7200;
+        pinentryFlavor = "curses";
       };
 
       # You can also manage environment variables but you will have to manually
