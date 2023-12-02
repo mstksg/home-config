@@ -27,7 +27,7 @@
       default = false;
     };
     gpgSignKey = lib.mkOption {
-      type = lib.types.str;
+      type = lib.types.nullOr lib.types.str;
       description = "Require gpg signing for this key (email) for git and other relevant places.";
       default = null;
     };
