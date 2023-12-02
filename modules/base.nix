@@ -167,9 +167,11 @@
           fish_vi_key_bindings
           set fish_greeting
           # fish_config theme choose "Solarized Dark"
+          ${lib.strings.optionalString config.autoTmux ''
           if not set -q NO_TMUX
             tmuxp-default
           end
+          ''}
         '';
       };
 
