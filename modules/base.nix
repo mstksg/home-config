@@ -319,10 +319,12 @@ in {
 
       programs.gpg.enable = true;
 
-      services.ssh-agent.enable = checkPlatform pkgs.openssh;
+      # TODO: this doesn't properly work for osx
+      services.ssh-agent.enable = pkgs.hostPlatform.isLinux;
 
+      # TODO: this doesn't properly work for osx
       services.gpg-agent = {
-        enable = checkPlatform pkgs.gnupg;
+        enable = pkgs.hostPlatform.isLinux;
         enableSshSupport = true;
         defaultCacheTtl = 7200;
         defaultCacheTtlSsh = 7200;
