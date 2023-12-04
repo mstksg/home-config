@@ -319,10 +319,8 @@ in {
 
       programs.gpg.enable = true;
 
-      # TODO: this doesn't properly work for osx
       services.ssh-agent.enable = pkgs.hostPlatform.isLinux;
 
-      # TODO: this doesn't properly work for osx
       services.gpg-agent = {
         enable = pkgs.hostPlatform.isLinux;
         enableSshSupport = true;
