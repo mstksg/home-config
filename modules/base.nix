@@ -320,6 +320,8 @@ in {
         '';
       };
 
+      programs.nix-index.enable = true;
+
       programs.gpg.enable = true;
 
       services.ssh-agent.enable = pkgs.hostPlatform.isLinux;
