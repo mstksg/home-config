@@ -94,6 +94,9 @@ in {
         (pkgs.writeShellScriptBin "tmuxp-default" ''
           [[ -z $NO_TMUX ]] && [[ -z $TMUX ]] && tmuxp load --yes default
         '')
+        (pkgs.writeShellScriptBin "y" ''
+          echo "y not?"
+        '')
       ];
 
       # Home Manager is pretty good at managing dotfiles. The primary way to manage
