@@ -328,7 +328,6 @@ in {
 
       services.gpg-agent = {
         enable = pkgs.hostPlatform.isLinux;
-        enableSshSupport = true;
         defaultCacheTtl = 7200;
         defaultCacheTtlSsh = 7200;
         pinentryFlavor = "curses";
