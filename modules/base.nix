@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }:
-{
+let checkPlatform = p: builtins.elem pkgs.system p.meta.platforms;
+in {
   options = {
     user = lib.mkOption {
       type = pkgs.lib.types.str;
@@ -51,7 +52,7 @@
 
       # The home.packages option allows you to install Nix packages into your
       # environment.
-      home.packages = builtins.filter (p: builtins.elem pkgs.system p.meta.platforms) [
+      home.packages = builtins.filter checkPlatform [
         # # Adds the 'hello' command to your environment. It prints a friendly
         # # "Hello, world!" when run.
         # pkgs.hello
@@ -318,10 +319,10 @@
 
       programs.gpg.enable = true;
 
-      services.ssh-agent.enable = true;
+      services.ssh-agent.enable = checkPlatform pkgs.openssh;
 
       services.gpg-agent = {
-        enable = true;
+        enable = checkPlatform pkgs.gnupg;
         enableSshSupport = true;
         defaultCacheTtl = 7200;
         defaultCacheTtlSsh = 7200;
