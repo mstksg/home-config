@@ -465,6 +465,8 @@ in
           let g:airline_solarized_bg = 'dark'
           let g:airline_detect_whitespace = 2
           let g:airline_powerline_fonts = 0
+
+          let g:pandoc#formatting#mode='ha'
         '';
       };
 
