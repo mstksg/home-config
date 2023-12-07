@@ -92,7 +92,7 @@ in {
       ] ++
       [
         (pkgs.writeShellScriptBin "tmuxp-default" ''
-          [[ -z $1 ]] && [[ -z $NO_TMUX ]] && [[ -z $TMUX ]] && tmuxp load --yes default
+          [[ -z $NO_TMUX ]] && [[ -z $TMUX ]] && tmuxp load --yes default
         '')
         (pkgs.writeShellScriptBin "y" ''
           echo "y not?"
@@ -160,7 +160,7 @@ in {
 
         initExtraFirst = ''
           ${lib.strings.optionalString config.autoTmux ''
-            [[ -z $NO_TMUX ]] && tmuxp-default
+            [[ $- == *i* ]] && [[ -z $NO_TMUX ]] && tmuxp-default
           ''}
         '';
       };
@@ -172,7 +172,7 @@ in {
           set fish_greeting
           # fish_config theme choose "Solarized Dark"
           ${lib.strings.optionalString config.autoTmux ''
-          if not set -q NO_TMUX
+          if not set -q NO_TMUX and status --is-interactive
             tmuxp-default
           end
           ''}
@@ -188,7 +188,7 @@ in {
           set -o vi
 
           ${lib.strings.optionalString config.autoTmux ''
-            [[ -z $NO_TMUX ]] && tmuxp-default
+            [[ $- == *i* ]] && [[ -z $NO_TMUX ]] && tmuxp-default
           ''}
         '';
       };
