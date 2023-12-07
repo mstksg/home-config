@@ -92,7 +92,7 @@ in {
       ] ++
       [
         (pkgs.writeShellScriptBin "tmuxp-default" ''
-          [[ -n $PS1 ]] && [[ -z $NO_TMUX ]] && [[ -z $TMUX ]] && tmuxp load --yes default
+          [[ -n $1 ]] && [[ -z $NO_TMUX ]] && [[ -z $TMUX ]] && tmuxp load --yes default
         '')
         (pkgs.writeShellScriptBin "y" ''
           echo "y not?"
