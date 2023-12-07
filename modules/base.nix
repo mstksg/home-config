@@ -92,7 +92,7 @@ in {
       ] ++
       [
         (pkgs.writeShellScriptBin "tmuxp-default" ''
-          [[ -z $NO_TMUX ]] && [[ -z $TMUX ]] && tmuxp load --yes default
+          [[ -t 0 ]] && [[ -z $NO_TMUX ]] && [[ -z $TMUX ]] && tmuxp load --yes default
         '')
         (pkgs.writeShellScriptBin "y" ''
           echo "y not?"
@@ -160,7 +160,7 @@ in {
 
         initExtraFirst = ''
           ${lib.strings.optionalString config.autoTmux ''
-            [[ $- == *i* ]] && [[ -z $NO_TMUX ]] && tmuxp-default
+            [[ -o interactive ]] && [[ -z $NO_TMUX ]] && tmuxp-default
           ''}
         '';
       };
@@ -189,7 +189,7 @@ in {
 
           ${lib.strings.optionalString config.autoTmux ''
             # TODO: make this be ignored when scp
-            # [[ $- == *i* ]] && [[ -z $NO_TMUX ]] && tmuxp-default
+            [[ $- == *i* ]] && [[ -z $NO_TMUX ]] && tmuxp-default
           ''}
         '';
       };
