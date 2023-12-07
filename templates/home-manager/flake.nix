@@ -12,13 +12,13 @@
 
   outputs = { nixpkgs, home-manager, home-config, ... }:
     let
-      system = "aarch64-linux";
+      system = "CHANGE_ME";
       pkgs = nixpkgs.legacyPackages.${system};
       config = {
         # user = "";
         # email = "";
         autoTmux = false;
-        gpgSign = false;
+        # gpgSignKey = null;
       };
     in
     {
