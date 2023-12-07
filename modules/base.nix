@@ -188,7 +188,8 @@ in {
           set -o vi
 
           ${lib.strings.optionalString config.autoTmux ''
-            [[ $- == *i* ]] && [[ -z $NO_TMUX ]] && tmuxp-default
+            # TODO: make this be ignored when scp
+            # [[ $- == *i* ]] && [[ -z $NO_TMUX ]] && tmuxp-default
           ''}
         '';
       };
