@@ -70,6 +70,8 @@ in {
         #   echo "Hello, ${config.home.username}!"
         # '')
 
+        # TODO: some of these can be moved out of basic
+
         pkgs.binutils
         pkgs.cachix
         pkgs.cmatrix
@@ -80,6 +82,7 @@ in {
         pkgs.lolcat
         pkgs.ncdu
         pkgs.nil
+        pkgs.nix-prefetch-git
         pkgs.nixfmt
         pkgs.nixpkgs-fmt
         pkgs.nodejs
