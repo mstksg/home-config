@@ -270,6 +270,7 @@ in
           coc-fzf
           coc-nvim
           delimitMate
+          dhall-vim
           fzf-vim
           haskell-vim
           purescript-vim
