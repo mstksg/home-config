@@ -81,7 +81,6 @@ in {
         pkgs.killall
         pkgs.lolcat
         pkgs.ncdu
-        pkgs.nil
         pkgs.nix-prefetch-git
         pkgs.nixfmt
         pkgs.nixpkgs-fmt

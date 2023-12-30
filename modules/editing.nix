@@ -218,6 +218,8 @@ in
           exit 1
         fi
       '')
+      pkgs.nil
+      pkgs.dhall-lsp-server
     ];
     home.file = {
       ".vim/coc-settings.json".text = ''
@@ -252,6 +254,10 @@ in
                   "formatter": "purty"
                 }
               }
+            },
+            "dhall": {
+              "command": "dhall-lsp-server",
+              "filetypes": ["dhall"]
             }
           }
         }
