@@ -221,7 +221,6 @@ in
       pkgs.nil
       pkgs.dhall-lsp-server
       pkgs.ormolu
-      pkgs.nodePackages.purty
     ];
     home.file = {
       ".vim/coc-settings.json".text = ''
