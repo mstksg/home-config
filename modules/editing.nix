@@ -251,8 +251,8 @@ in
               "settings": {
                 "purescript": {
                   "addSpagoSources": true,
-                  "addNpmPath": true, // Set to true if using a local purty install for formatting
-                  "formatter": "purty"
+                  "addNpmPath": false, // Set to true if using a local purty install for formatting
+                  "formatter": "purs-tidy"
                 }
               }
             },
