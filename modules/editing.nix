@@ -298,6 +298,7 @@ in
           vim-pandoc
           vim-pandoc-after
           vim-pandoc-syntax
+          vim-pug
           vim-repeat
           vim-sensible
           vim-signature
