@@ -201,7 +201,17 @@ let
       autocmd FileType pandoc let b:coc_suggest_disable = 1
     '';
   };
-
+  vim-mql5 = pkgs.vimUtils.buildVimPlugin {
+    pname = "vim-mql5";
+    version = "2015-10-27";
+    src = pkgs.fetchFromGithub {
+      owner = "rupurt";
+      repo = "vim-mql5";
+      rev = "6ccfa51f3643a45e2b457fee0f9aac3c37dfc8bd";
+      sha256 = "sha256-WKB5m8fJXoONtZFe2Xgm1xn+vsnPCcaRMeY7bQiBaTk=";
+    };
+    meta.homepage = "https://github.com/rupurt/vim-mql5";
+  };
 in
 {
   config = {
@@ -294,6 +304,7 @@ in
           vim-fugitive
           vim-gitgutter
           vim-indent-object
+          vim-mql5
           vim-mundo
           vim-pandoc
           vim-pandoc-after
