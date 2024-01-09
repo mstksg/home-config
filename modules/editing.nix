@@ -204,7 +204,7 @@ let
   vim-mql5 = pkgs.vimUtils.buildVimPlugin {
     pname = "vim-mql5";
     version = "2015-10-27";
-    src = pkgs.fetchFromGithub {
+    src = pkgs.fetchFromGitHub {
       owner = "rupurt";
       repo = "vim-mql5";
       rev = "6ccfa51f3643a45e2b457fee0f9aac3c37dfc8bd";
