@@ -76,6 +76,7 @@ in {
         pkgs.cachix
         pkgs.cmatrix
         pkgs.fzf
+        pkgs.git-crypt
         pkgs.glances
         pkgs.jq
         pkgs.killall
