@@ -231,7 +231,6 @@ in
       pkgs.nil
       pkgs.dhall-lsp-server
       pkgs.ormolu
-      pkgs.ccls
     ];
     home.file = {
       ".vim/coc-settings.json".text = ''
@@ -270,16 +269,6 @@ in
             "dhall": {
               "command": "dhall-lsp-server",
               "filetypes": ["dhall"]
-            },
-            "ccls": {
-              "command": "ccls",
-              "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
-              "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
-              "initializationOptions": {
-                  "cache": {
-                    "directory": "/tmp/ccls"
-                  }
-                }
             }
           }
         }
