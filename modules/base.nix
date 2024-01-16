@@ -222,8 +222,7 @@ in {
         };
         aliases = {
           st = "status";
-          lg =
-            "lg = log --oneline --abbrev-commit --all --graph --decorate --color";
+          lg = "log --oneline --abbrev-commit --all --graph --decorate --color";
           sha = "rev-parse HEAD";
         };
         delta = {
