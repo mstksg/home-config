@@ -77,7 +77,6 @@ in {
         pkgs.cmatrix
         pkgs.fzf
         pkgs.git-crypt
-        pkgs.git-lfs
         pkgs.glances
         pkgs.jq
         pkgs.killall
@@ -217,6 +216,7 @@ in {
         enable = true;
         userName = config.user;
         userEmail = config.email;
+        lfs.enable = true;
         signing = {
           key = config.gpgSignKey;
           signByDefault = config.gpgSignKey != null;
