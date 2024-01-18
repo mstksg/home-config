@@ -266,6 +266,8 @@ in {
         gitCredentialHelper.hosts = [
           "https://github.com"
         ];
+        # Workaround for https://github.com/nix-community/home-manager/issues/4744
+        settiongs.version = 1;
       };
 
       programs.eza = {
