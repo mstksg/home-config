@@ -75,6 +75,7 @@ in {
         pkgs.binutils
         pkgs.cachix
         pkgs.cmatrix
+        pkgs.httplz
         pkgs.fzf
         pkgs.git-crypt
         pkgs.glances
