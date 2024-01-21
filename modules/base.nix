@@ -91,6 +91,7 @@ in {
         pkgs.sl
         pkgs.tree
         pkgs.uptimed
+        pkgs.w3m
         pkgs.wget
       ] ++
       [
