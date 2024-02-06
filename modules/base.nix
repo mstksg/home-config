@@ -27,6 +27,11 @@ in {
       description = "Whether or not to automatically enter a persistent tmux session on a new shell. set $NO_TMUX to bypass";
       default = false;
     };
+    extraTmuxWindows = lib.mkOption {
+      type = lib.types.attrs;
+      description = "Extra tmux windows to load on the default pane, in tmuxp format";
+      default = { };
+    };
     gpgSignKey = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       description = "Require gpg signing for this key (email) for git and other relevant places.";
@@ -118,18 +123,16 @@ in {
         #   org.gradle.daemon.idletimeout=3600000
         # '';
 
-        ".config/tmuxp/default.yaml".text = ''
-          session_name: default
-          windows:
-          - window_name: htop
-            layout: tiled
-            panes:
-            - glances
-          - window_name: welcome
-            focus: true
-            panes:
-            - cmatrix -ab
-        '';
+        ".config/tmuxp/default.yaml".text =
+          builtins.toJSON
+            {
+              session_name = "default";
+              windows = [
+                { window_name = "htop"; panes = [ "glances" ]; }
+              ] ++ config.extraTmuxWindows ++ [
+                { window_name = "welcone"; panes = [ "cmatrix -ab" ]; focus = true; }
+              ];
+            };
 
         ".haskeline".text = ''
           maxHistorySize: Nothing
