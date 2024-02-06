@@ -30,7 +30,7 @@ in {
     extraTmuxWindows = lib.mkOption {
       type = lib.types.list;
       description = "Extra tmux windows to load on the default pane, in tmuxp format";
-      default = { };
+      default = [ ];
     };
     gpgSignKey = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
