@@ -28,7 +28,7 @@ in {
       default = false;
     };
     extraTmuxWindows = lib.mkOption {
-      type = lib.types.list;
+      type = lib.types.listOf lib.types.attrs;
       description = "Extra tmux windows to load on the default pane, in tmuxp format";
       default = [ ];
     };
