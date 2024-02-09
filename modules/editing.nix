@@ -1,12 +1,6 @@
 { pkgs, ... }:
 let
-  formatJson = buildInputs: cmd: body:
-    let jsonFile = pkgs.writeTextDir "file.json" (builtins.toJSON body);
-    in pkgs.runCommand "formatJson"
-      { inherit buildInputs; }
-      ''
-        cat ${jsonFile}/file.json | ${cmd} > $out
-      '';
+  util = (import ./util.nix) { inherit pkgs; };
   simplePlugin = name: body: pkgs.vimUtils.buildVimPlugin {
     inherit name;
     src = pkgs.writeTextDir "plugin/${name}.vim" body;
@@ -240,7 +234,7 @@ in
       pkgs.haskellPackages.fourmolu
       pkgs.ormolu
     ];
-    xdg.configFile."fourmolu.yaml".source = formatJson [ pkgs.yq ] "yq -y"
+    xdg.configFile."fourmolu.yaml".source = util.formatJson [ pkgs.yq ] "yq -y"
       {
         indentation = 2;
         column-limit = 80;
@@ -261,7 +255,7 @@ in
         reexports = [ ];
       };
     home.file = {
-      ".vim/coc-settings.json".source = formatJson [ pkgs.jq ] "jq"
+      ".vim/coc-settings.json".source = util.formatJson [ pkgs.jq ] "jq"
         {
           languageserver = {
             haskell = {
