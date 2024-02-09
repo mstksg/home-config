@@ -230,6 +230,7 @@ in
       '')
       pkgs.nil
       pkgs.dhall-lsp-server
+      pkgs.haskellPackages.fourmolu
       pkgs.ormolu
     ];
     home.file = {
