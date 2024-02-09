@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
   formatJson = buildInputs: cmd: body:
-    let jsonFile = pkgs.writeTextDir "file.json" builtins.toJSON body;
+    let jsonFile = pkgs.writeTextDir "file.json" (builtins.toJSON body);
     in pkgs.runCommand "formatJson"
       { inherit buildInputs; }
       ''
