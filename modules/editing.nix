@@ -233,6 +233,25 @@ in
       pkgs.haskellPackages.fourmolu
       pkgs.ormolu
     ];
+    xdg.configFile."fourmolu.yaml".text = builtins.toJSON {
+      indentation = 2;
+      column-limit = 80;
+      function-arrows = "trailing";
+      comma-style = "leading";
+      import-export-style = "diff-friendly";
+      indent-wheres = true;
+      record-break-space = true;
+      newlines-between-decls = 1;
+      haddock-style = "single-line";
+      haddock-style-module = null;
+      let-style = "inline";
+      in-style = "right-align";
+      single-constraint-parens = "never";
+      unicode = "detect";
+      respectful = "true";
+      fixities = [ ];
+      reexports = [ ];
+    };
     home.file = {
       ".vim/coc-settings.json".text = builtins.toJSON
         {
@@ -242,6 +261,11 @@ in
               args = [ "--lsp" ];
               rootPatterns = [ "*.cabal" "stack.yaml" "cabal.project" "package.yaml" "hie.yaml" ];
               filetypes = [ "haskell" "lhaskell" ];
+              settings = {
+                haskell = {
+                  formattingProvider = "fourmolu";
+                };
+              };
             };
             nix = {
               command = "nil";
@@ -267,9 +291,9 @@ in
                 };
               };
             };
-            dhall= {
-              command= "dhall-lsp-server";
-              filetypes= ["dhall"];
+            dhall = {
+              command = "dhall-lsp-server";
+              filetypes = [ "dhall" ];
             };
           };
         };
