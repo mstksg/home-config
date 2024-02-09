@@ -1,5 +1,12 @@
 { pkgs, ... }:
 let
+  formatJson = buildInputs: cmd: body:
+    let jsonFile = pkgs.writeTextFile "file.json" builtins.toJSON body;
+    in pkgs.runCommand "formatJson"
+      { inherit buildInputs; }
+      ''
+        cat ${jsonFile}/file.json | ${cmd} > $out
+      '';
   simplePlugin = name: body: pkgs.vimUtils.buildVimPlugin {
     inherit name;
     src = pkgs.writeTextDir "plugin/${name}.vim" body;
@@ -233,27 +240,28 @@ in
       pkgs.haskellPackages.fourmolu
       pkgs.ormolu
     ];
-    xdg.configFile."fourmolu.yaml".text = builtins.toJSON {
-      indentation = 2;
-      column-limit = 80;
-      function-arrows = "trailing";
-      comma-style = "leading";
-      import-export-style = "diff-friendly";
-      indent-wheres = true;
-      record-break-space = true;
-      newlines-between-decls = 1;
-      haddock-style = "single-line";
-      haddock-style-module = null;
-      let-style = "inline";
-      in-style = "right-align";
-      single-constraint-parens = "never";
-      unicode = "detect";
-      respectful = true;
-      fixities = [ ];
-      reexports = [ ];
-    };
+    xdg.configFile."fourmolu.yaml".source = formatJson [ pkgs.yq ] "yq -y"
+      {
+        indentation = 2;
+        column-limit = 80;
+        function-arrows = "trailing";
+        comma-style = "leading";
+        import-export-style = "diff-friendly";
+        indent-wheres = true;
+        record-break-space = true;
+        newlines-between-decls = 1;
+        haddock-style = "single-line";
+        haddock-style-module = null;
+        let-style = "inline";
+        in-style = "right-align";
+        single-constraint-parens = "never";
+        unicode = "detect";
+        respectful = true;
+        fixities = [ ];
+        reexports = [ ];
+      };
     home.file = {
-      ".vim/coc-settings.json".text = builtins.toJSON
+      ".vim/coc-settings.json".source = formatJson [ pkgs.jq ] "jq"
         {
           languageserver = {
             haskell = {
