@@ -234,46 +234,45 @@ in
       pkgs.ormolu
     ];
     home.file = {
-      ".vim/coc-settings.json".text = ''
+      ".vim/coc-settings.json".text = builtins.toJSON
         {
-          "languageserver": {
-            "haskell": {
-              "command": "haskell-language-server-wrapper-2",
-              "args": ["--lsp"],
-              "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
-              "filetypes": ["haskell", "lhaskell"]
-            },
-            "nix": {
-              "command": "nil",
-              "filetypes": ["nix"],
-              "rootPatterns": ["flake.nix"],
-              "settings": {
-                "nil": {
-                  "formatting": { "command": ["nixpkgs-fmt"] }
-                }
-              }
-            },
-            "purescript": {
-              "command": "purescript-language-server",
-              "args": ["--stdio"],
-              "filetypes": ["purescript"],
-              "trace.server": "off",
-              "rootPatterns": ["bower.json", "psc-package.json", "spago.dhall", "spago.yaml"],
-              "settings": {
-                "purescript": {
-                  "addSpagoSources": true,
-                  "addNpmPath": false, // Set to true if using a local purty install for formatting
-                  "formatter": "purs-tidy"
-                }
-              }
-            },
-            "dhall": {
-              "command": "dhall-lsp-server",
-              "filetypes": ["dhall"]
-            }
-          }
-        }
-      '';
+          languageserver = {
+            haskell = {
+              command = "haskell-language-server-wrapper-2";
+              args = [ "--lsp" ];
+              rootPatterns = [ "*.cabal" "stack.yaml" "cabal.project" "package.yaml" "hie.yaml" ];
+              filetypes = [ "haskell" "lhaskell" ];
+            };
+            nix = {
+              command = "nil";
+              filetypes = [ "nix" ];
+              rootPatterns = [ "flake.nix" ];
+              settings = {
+                nil = {
+                  formatting = { command = [ "nixpkgs-fmt" ]; };
+                };
+              };
+            };
+            purescript = {
+              command = "purescript-language-server";
+              args = [ "--stdio" ];
+              filetypes = [ "purescript" ];
+              "trace.server" = "off";
+              rootPatterns = [ "bower.json" "psc-package.json" "spago.dhall" "spago.yaml" ];
+              settings = {
+                purescript = {
+                  addSpagoSources = true;
+                  addNpmPath = false;
+                  formatter = "purs-tidy";
+                };
+              };
+            };
+            dhall= {
+              command= "dhall-lsp-server";
+              filetypes= ["dhall"];
+            };
+          };
+        };
     };
     programs.vim =
       {
