@@ -133,7 +133,7 @@ in
         '';
       };
       xdg.configFile."tmuxp/default.yaml".source =
-        util.formatJson [ pkgs.jq ] "jq"
+        util.formatJson [ pkgs.yq ] "yq -y"
           {
             session_name = "default";
             windows = [
