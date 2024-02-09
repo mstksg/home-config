@@ -248,7 +248,7 @@ in
       in-style = "right-align";
       single-constraint-parens = "never";
       unicode = "detect";
-      respectful = "true";
+      respectful = true;
       fixities = [ ];
       reexports = [ ];
     };
