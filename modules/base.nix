@@ -1,6 +1,9 @@
 { config, lib, pkgs, ... }:
-let checkPlatform = p: builtins.elem pkgs.system p.meta.platforms;
-in {
+let
+  checkPlatform = p: builtins.elem pkgs.system p.meta.platforms;
+  util = (import ./util.nix) { inherit pkgs; };
+in
+{
   options = {
     user = lib.mkOption {
       type = pkgs.lib.types.str;
@@ -123,24 +126,22 @@ in {
         #   org.gradle.daemon.idletimeout=3600000
         # '';
 
-        ".config/tmuxp/default.yaml".text =
-          builtins.toJSON
-            {
-              session_name = "default";
-              windows = [
-                { window_name = "htop"; panes = [ "glances" ]; }
-              ] ++ config.extraTmuxWindows ++ [
-                { window_name = "welcome"; panes = [ "cmatrix -ab" ]; focus = true; }
-              ];
-            };
-
         ".haskeline".text = ''
           maxHistorySize: Nothing
           historyDuplicates: IgnoreConsecutive
           editMode: Vi
         '';
       };
-
+      xdg.configFile."tmuxp/default.yaml".source =
+        util.formatJson [ pkgs.jq ] "jq"
+          {
+            session_name = "default";
+            windows = [
+              { window_name = "htop"; panes = [ "glances" ]; }
+            ] ++ config.extraTmuxWindows ++ [
+              { window_name = "welcome"; panes = [ "cmatrix -ab" ]; focus = true; }
+            ];
+          };
       programs.fzf = {
         enable = true;
         tmux.enableShellIntegration = true;
