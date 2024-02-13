@@ -237,7 +237,7 @@ in
     xdg.configFile."fourmolu.yaml".source = util.formatJson [ pkgs.yq ] "yq -y"
       {
         indentation = 2;
-        column-limit = 80;
+        column-limit = 100;
         function-arrows = "trailing";
         comma-style = "leading";
         import-export-style = "diff-friendly";
