@@ -486,7 +486,6 @@ in
           " nnoremap <CR> :nohlsearch<CR>
           nnoremap <c-p> :FZF<CR>
           cabbrev wq w
-          tnoremap <C-\> <C-\><C-n>:bp<CR>
 
           noremap <leader>tt :tn<CR>
           noremap <leader>tp :tN<CR>
