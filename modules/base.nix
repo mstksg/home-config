@@ -83,15 +83,16 @@ in
         pkgs.binutils
         pkgs.cachix
         pkgs.cmatrix
-        pkgs.httplz
         pkgs.fzf
         pkgs.git-crypt
         pkgs.glances
+        pkgs.httplz
         pkgs.jq
         pkgs.killall
         pkgs.lolcat
         pkgs.ncdu
         pkgs.nix-prefetch-git
+        pkgs.nix-tree
         pkgs.nixfmt
         pkgs.nixpkgs-fmt
         pkgs.nodejs
