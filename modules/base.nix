@@ -140,7 +140,7 @@ in
             windows = [
               { window_name = "htop"; panes = [ "glances" ]; }
             ] ++ config.extraTmuxWindows ++ [
-              { window_name = "welcome"; panes = [ "cmatrix -ab" ]; focus = true; }
+              { window_name = "welcome"; panes = [ "${pkgs.cmatrix}/bin/cmatrix -ab" ]; focus = true; }
             ];
           };
       programs.fzf = {
