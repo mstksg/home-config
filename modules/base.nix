@@ -185,6 +185,7 @@ in
             tmuxp-default
           end
           ''}
+          bass source ~/.nix-profile/etc/profile.d/hm-session-vars.sh
         '';
 
         plugins = [
