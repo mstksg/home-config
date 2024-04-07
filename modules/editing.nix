@@ -513,6 +513,8 @@ in
           let g:airline_powerline_fonts = 0
 
           let g:pandoc#formatting#mode='hA'
+
+          autocmd FileType ledger setlocal commentstring=;\ %s
         '';
       };
 
