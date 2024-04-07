@@ -100,6 +100,7 @@ in
         pkgs.rogue
         pkgs.sl
         pkgs.tree
+        pkgs.unzip
         pkgs.w3m
         pkgs.wget
       ] ++
