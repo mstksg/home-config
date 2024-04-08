@@ -330,6 +330,7 @@ in
           vim-fugitive
           vim-gitgutter
           vim-indent-object
+          vim-ledger
           vim-mql5
           vim-mundo
           vim-pandoc
