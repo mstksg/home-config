@@ -83,6 +83,7 @@ in
         pkgs.binutils
         pkgs.cachix
         pkgs.cmatrix
+        pkgs.csvlens
         pkgs.fzf
         pkgs.git-crypt
         pkgs.glances
