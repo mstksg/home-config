@@ -246,6 +246,7 @@ in
           st = "status";
           lg = "log --oneline --abbrev-commit --all --graph --decorate --color";
           sha = "rev-parse HEAD";
+          last = "log -1 HEAD --stat";
         };
         delta = {
           enable = true;
