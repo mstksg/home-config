@@ -103,6 +103,7 @@ in
         pkgs.tree
         pkgs.unzip
         pkgs.w3m
+        pkgs.wcalc
         pkgs.wget
       ] ++
       [
