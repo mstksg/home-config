@@ -358,7 +358,7 @@ in
         enable = pkgs.hostPlatform.isLinux;
         defaultCacheTtl = 7200;
         defaultCacheTtlSsh = 7200;
-        pinentryPackage = pkgs.pinetry-curses;
+        pinentryPackage = pkgs.pinentry-curses;
       };
 
       # You can also manage environment variables but you will have to manually
