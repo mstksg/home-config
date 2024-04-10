@@ -247,6 +247,7 @@ in
           lg = "log --oneline --abbrev-commit --all --graph --decorate --color";
           sha = "rev-parse HEAD";
           last = "log -1 HEAD --stat";
+          commit-now = "!git commit -m $(date --iso-8601=seconds)";
         };
         delta = {
           enable = true;
