@@ -94,7 +94,7 @@ in
         pkgs.ncdu
         pkgs.nix-prefetch-git
         pkgs.nix-tree
-        pkgs.nixfmt
+        pkgs.nixfmt-classic
         pkgs.nixpkgs-fmt
         pkgs.nodejs
         pkgs.ripgrep
