@@ -220,9 +220,9 @@ in
 
       programs.readline = {
         enable = true;
-        extraConfig = ''
-          set editing-mode vi
-        '';
+        variables = {
+          editing-mode = "vi";
+        };
       };
 
       programs.bat = {
