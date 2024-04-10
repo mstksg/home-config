@@ -221,7 +221,7 @@ in
       programs.readline = {
         enable = true;
         extraConfig = ''
-          set -o vi
+          set editing-mode vi
         '';
       };
 
