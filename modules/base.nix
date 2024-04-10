@@ -294,7 +294,6 @@ in
 
       programs.eza = {
         enable = true;
-        enableAliases = true;
         git = true;
       };
 
@@ -359,7 +358,7 @@ in
         enable = pkgs.hostPlatform.isLinux;
         defaultCacheTtl = 7200;
         defaultCacheTtlSsh = 7200;
-        pinentryFlavor = "curses";
+        pinentryPackage = pkgs.pinetry-curses;
       };
 
       # You can also manage environment variables but you will have to manually
