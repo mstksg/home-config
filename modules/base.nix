@@ -78,7 +78,6 @@ in
         pkgs.nixfmt-classic
         pkgs.nixpkgs-fmt
         pkgs.nodejs
-        pkgs.octave
         pkgs.ripgrep
         pkgs.rogue
         pkgs.sl
