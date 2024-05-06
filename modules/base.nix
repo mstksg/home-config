@@ -69,6 +69,7 @@ in
         pkgs.fzf
         pkgs.git-crypt
         pkgs.glances
+        pkgs.hexyl
         pkgs.httplz
         pkgs.jq
         pkgs.killall
