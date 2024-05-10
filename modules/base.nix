@@ -66,6 +66,7 @@ in
         pkgs.cmatrix
         pkgs.csvlens
         pkgs.dhall
+        pkgs.file
         pkgs.fzf
         pkgs.git-crypt
         pkgs.glances
