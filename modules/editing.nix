@@ -266,7 +266,7 @@ in
               settings = {
                 haskell = {
                   formattingProvider = "fourmolu";
-                  plugin.fourmolu.config.external = "true";
+                  plugin.fourmolu.config.external = true;
                 };
               };
             };
