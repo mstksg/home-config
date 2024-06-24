@@ -234,6 +234,7 @@ in
       pkgs.haskellPackages.fourmolu
       pkgs.ormolu
       pkgs.haskellPackages.cabal-fmt
+      pkgs.nodePackages.prettier
     ];
     xdg.configFile."fourmolu.yaml".source = util.formatJson [ pkgs.yq ] "yq -y"
       {
