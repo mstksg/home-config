@@ -233,6 +233,7 @@ in
       pkgs.dhall-lsp-server
       pkgs.haskellPackages.fourmolu
       pkgs.ormolu
+      pkgs.haskellPackages.cabal-fmt
     ];
     xdg.configFile."fourmolu.yaml".source = util.formatJson [ pkgs.yq ] "yq -y"
       {
