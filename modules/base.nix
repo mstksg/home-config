@@ -337,6 +337,12 @@ in
 
       programs.gpg.enable = true;
 
+      programs.direnv = {
+        enable = true;
+        nix-direnv.enable = true;
+      };
+      programs.starship.enable = true;
+
       services.ssh-agent.enable = pkgs.hostPlatform.isLinux;
 
       services.gpg-agent = {
