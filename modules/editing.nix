@@ -494,6 +494,8 @@ in
           noremap <leader>tt :tn<CR>
           noremap <leader>tp :tN<CR>
           noremap <leader>ws :%s/\s\+$//<CR>:nohlsearch<CR>
+          noremap <leader>time "=strftime("%Y/%m/%d %H:%M:%S")<CR>p
+          command! Shuffle :sort /.*\%6v/
 
           command! ToggleTabs :setlocal et!
 
