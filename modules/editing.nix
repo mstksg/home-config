@@ -518,7 +518,7 @@ in
           let g:airline_detect_whitespace = 2
           let g:airline_powerline_fonts = 0
 
-          let g:pandoc#formatting#mode='hA'
+          let g:pandoc#formatting#mode='h'
 
           autocmd FileType ledger setlocal commentstring=;\ %s
         '';
