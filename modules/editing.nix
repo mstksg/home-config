@@ -270,6 +270,7 @@ in
           "diagnostic.format" = "%message [%source]";
           "diagnostic.separateRelatedInformationAsDiagnostics" = true;
           "diagnostic.virtualText" = true;
+          "git.addGBlameToVirtualText" = true;
           languageserver = {
             haskell = {
               command = "haskell-language-server-wrapper-2";
