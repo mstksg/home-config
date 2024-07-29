@@ -261,15 +261,17 @@ in
         {
           coc.preferences.enableLinkedEditing = true;
           codeLens.enable = true;
-          colors.enable = true;
-          diagnostic.checkCurrentLine = true;
-          diagnostic.floatConfig = {
-            border = true;
-            rounded = true;
+          # colors.enable = true;
+          diagnostic = {
+            checkCurrentLine = true;
+            floatConfig = {
+              border = true;
+              rounded = true;
+            };
+            format = "%message [%source]";
+            separateRelatedInformationAsDiagnostics = true;
+            virtualText = true;
           };
-          diagnostic.format = "%message [%source]";
-          diagnostic.separateRelatedInformationAsDiagnostics = true;
-          diagnostic.virtualText = true;
           git.addGBlameToVirtualText = true;
           languageserver = {
             haskell = {
