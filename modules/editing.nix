@@ -329,6 +329,7 @@ in
           delimitMate
           dhall-vim
           fzf-vim
+          gitsigns-nvim
           haskell-vim
           purescript-vim
           syntastic
