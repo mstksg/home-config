@@ -325,11 +325,11 @@ in
           bufexplorer
           coc-explorer
           coc-fzf
+          coc-git
           coc-nvim
           delimitMate
           dhall-vim
           fzf-vim
-          gitsigns-nvim
           haskell-vim
           purescript-vim
           syntastic
