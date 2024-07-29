@@ -384,6 +384,7 @@ in
           set foldmethod=syntax
           set t_Co=256
           set showcmd
+          set relativenumber
           autocmd InsertEnter,InsertLeave * set cul!
           " match ErrorMsg '\%>80v.\+'
           set showbreak =\ ++\ \ \
