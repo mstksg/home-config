@@ -259,18 +259,18 @@ in
     home.file = {
       ".vim/coc-settings.json".source = util.formatJson [ pkgs.jq ] "jq"
         {
-          "coc.preferences.enableLinkedEditing" = true;
-          "codeLens.enable" = true;
-          "colors.enable" = true;
-          "diagnostic.checkCurrentLine" = true;
-          "diagnostic.floatConfig" = {
+          coc.preferences.enableLinkedEditing = true;
+          codeLens.enable = true;
+          colors.enable = true;
+          diagnostic.checkCurrentLine = true;
+          diagnostic.floatConfig = {
             border = true;
             rounded = true;
           };
-          "diagnostic.format" = "%message [%source]";
-          "diagnostic.separateRelatedInformationAsDiagnostics" = true;
-          "diagnostic.virtualText" = true;
-          "git.addGBlameToVirtualText" = true;
+          diagnostic.format = "%message [%source]";
+          diagnostic.separateRelatedInformationAsDiagnostics = true;
+          diagnostic.virtualText = true;
+          git.addGBlameToVirtualText = true;
           languageserver = {
             haskell = {
               command = "haskell-language-server-wrapper-2";
