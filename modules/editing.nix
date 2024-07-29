@@ -260,8 +260,8 @@ in
       ".vim/coc-settings.json".source = util.formatJson [ pkgs.jq ] "jq"
         {
           coc.preferences.enableLinkedEditing = true;
-          codeLens.enable = true;
-          # colors.enable = true;
+          # codeLens.enable = true;
+          colors.enable = true;
           diagnostic = {
             checkCurrentLine = true;
             floatConfig = {
