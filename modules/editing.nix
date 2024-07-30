@@ -198,11 +198,12 @@ let
       nnoremap <silent><nowait> <space>e  <Cmd>CocCommand explorer<CR>
 
       " by filetype
-      autocmd FileType markdown let b:coc_suggest_disable = 1
+      autocmd FileType markdown let b:coc_enabled = 0
+      autocmd FileType pandoc let b:coc_suggest_disable = 1
       autocmd FileType pandoc let b:coc_suggest_disable = 1
 
       " codeLens text
-      hi CocCodeLens term=bold cterm=italic ctermfg=242 gui=italic guifg=lightblue
+      hi CocCodeLens term=bold cterm=italic ctermfg=242 gui=italic guifg=#444444
     '';
   };
   vim-mql5 = pkgs.vimUtils.buildVimPlugin {
