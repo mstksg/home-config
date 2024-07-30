@@ -200,6 +200,9 @@ let
       " by filetype
       autocmd FileType markdown let b:coc_suggest_disable = 1
       autocmd FileType pandoc let b:coc_suggest_disable = 1
+
+      " codeLens text
+      hi CocCodeLens term=bold cterm=italic ctermfg=242 gui=italic guifg=#e2e7e9
     '';
   };
   vim-mql5 = pkgs.vimUtils.buildVimPlugin {
