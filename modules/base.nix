@@ -170,11 +170,13 @@ in
           # fish_config theme choose "Solarized Dark"
 
           function history_prev
+              echo "history_prev called"
               commandline -f cancel
               commandline -f history-search-backward
           end
 
           function history_next
+              echo "history_prev called"
               commandline -f cancel
               commandline -f history-search-forward
           end
