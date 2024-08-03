@@ -168,29 +168,6 @@ in
           fish_vi_key_bindings
           set fish_greeting
           # fish_config theme choose "Solarized Dark"
-
-          function history_prev
-              echo "history_prev called"
-              commandline -f cancel
-              commandline -f history-search-backward
-          end
-
-          function history_next
-              echo "history_prev called"
-              commandline -f cancel
-              commandline -f history-search-forward
-          end
-
-          function fish_user_key_bindings
-              echo "fish_user_key_bindings called"
-              # Bind up arrow to navigate to the previous command in history by recency
-              bind \\e\\[A history_prev
-              # Bind down arrow to navigate to the next command in history by recency
-              bind \\e\\[B history_next
-          end
-
-          fish_user_key_bindings
-
           ${lib.strings.optionalString config.autoTmux ''
           if not set -q NO_TMUX and status --is-interactive
             tmuxp-default
