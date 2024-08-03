@@ -184,9 +184,9 @@ in
           function fish_user_key_bindings
               echo "fish_user_key_bindings called"
               # Bind up arrow to navigate to the previous command in history by recency
-              bind \e\eOA history_prev
+              bind \\e\\[A history_prev
               # Bind down arrow to navigate to the next command in history by recency
-              bind \e\eOB history_next
+              bind \\e\\[B history_next
           end
 
           fish_user_key_bindings
