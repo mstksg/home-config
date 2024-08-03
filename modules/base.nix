@@ -176,7 +176,7 @@ in
               bind \e\[B 'commandline -r; commandline -f history-search-forward'
           end
 
-          fish_user_key_binding
+          fish_user_key_bindings
 
           ${lib.strings.optionalString config.autoTmux ''
           if not set -q NO_TMUX and status --is-interactive
