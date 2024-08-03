@@ -169,11 +169,21 @@ in
           set fish_greeting
           # fish_config theme choose "Solarized Dark"
 
+          function history_prev
+              commandline -f cancel
+              commandline -f history-search-backward
+          end
+
+          function history_next
+              commandline -f cancel
+              commandline -f history-search-forward
+          end
+
           function fish_user_key_bindings
-              # Bind up arrow to clear the command line and then navigate to the previous command in history by recency
-              bind \e\[A 'commandline -r; commandline -f history-search-backward'
-              # Bind down arrow to clear the command line and then navigate to the next command in history by recency
-              bind \e\[B 'commandline -r; commandline -f history-search-forward'
+              # Bind up arrow to navigate to the previous command in history by recency
+              bind \e\[A history_prev
+              # Bind down arrow to navigate to the next command in history by recency
+              bind \e\[B history_next
           end
 
           fish_user_key_bindings
