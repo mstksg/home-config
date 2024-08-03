@@ -168,6 +168,16 @@ in
           fish_vi_key_bindings
           set fish_greeting
           # fish_config theme choose "Solarized Dark"
+
+          function fish_user_key_bindings
+              # Bind up arrow to clear the command line and then navigate to the previous command in history by recency
+              bind \e\[A 'commandline -r; commandline -f history-search-backward'
+              # Bind down arrow to clear the command line and then navigate to the next command in history by recency
+              bind \e\[B 'commandline -r; commandline -f history-search-forward'
+          end
+
+          fish_user_key_binding
+
           ${lib.strings.optionalString config.autoTmux ''
           if not set -q NO_TMUX and status --is-interactive
             tmuxp-default
