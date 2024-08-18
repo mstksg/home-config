@@ -542,6 +542,7 @@ in
           let g:pandoc#formatting#mode='h'
 
           autocmd FileType ledger setlocal commentstring=;\ %s
+          autocmd FileType cabal setlocal foldmethod=indent
         '';
       };
   };
