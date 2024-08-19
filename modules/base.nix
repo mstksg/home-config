@@ -85,6 +85,7 @@ in
         pkgs.ripgrep
         pkgs.rogue
         pkgs.sl
+        pkgs.tldr
         pkgs.tree
         pkgs.unzip
         pkgs.w3m
