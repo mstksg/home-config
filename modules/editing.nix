@@ -234,7 +234,7 @@ in
       '')
       pkgs.nil
       pkgs.dhall-lsp-server
-      pkgs.haskellPackages.fourmolu
+      pkgs.haskellPackages.fourmolu_16_2_0
       pkgs.ormolu
       pkgs.haskellPackages.cabal-fmt
       pkgs.nodePackages.prettier
