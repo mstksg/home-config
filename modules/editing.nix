@@ -239,6 +239,7 @@ in
       pkgs.nodePackages.bash-language-server
       pkgs.nodePackages.prettier
       pkgs.ormolu
+      pkgs.shfmt
     ];
     xdg.configFile."fourmolu.yaml".source = util.formatJson [ pkgs.yq ] "yq -y"
       {
