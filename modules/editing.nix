@@ -232,12 +232,13 @@ in
           exit 1
         fi
       '')
-      pkgs.nil
       pkgs.dhall-lsp-server
-      pkgs.haskellPackages.fourmolu
-      pkgs.ormolu
       pkgs.haskellPackages.cabal-fmt
+      pkgs.haskellPackages.fourmolu
+      pkgs.nil
+      pkgs.nodePackages.bash-language-server
       pkgs.nodePackages.prettier
+      pkgs.ormolu
     ];
     xdg.configFile."fourmolu.yaml".source = util.formatJson [ pkgs.yq ] "yq -y"
       {
@@ -318,6 +319,12 @@ in
             dhall = {
               command = "dhall-lsp-server";
               filetypes = [ "dhall" ];
+            };
+            bash = {
+              command = "bash-language-server";
+              args = ["start"];
+              filetypes = ["sh"];
+              ignoredRootPaths = ["~"];
             };
           };
         };
