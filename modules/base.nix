@@ -68,6 +68,7 @@ in
         pkgs.dhall
         pkgs.fastfetch
         pkgs.file
+        pkgs.fx
         pkgs.fzf
         pkgs.git-crypt
         pkgs.glances
