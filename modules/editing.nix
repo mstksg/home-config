@@ -339,6 +339,7 @@ in
           NrrwRgn
           awesome-vim-colorschemes
           bufexplorer
+          coc-clangd
           coc-explorer
           coc-fzf
           coc-git
