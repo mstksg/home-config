@@ -280,6 +280,10 @@ in
             virtualText = true;
           };
           git.addGBlameToVirtualText = true;
+          semanticTokens = {
+            enable = true;
+            filetypes = [ "c" "cpp" "haskell" "nix" "purescript" "dhall" "bash" ];
+          };
           languageserver = {
             haskell = {
               command = "haskell-language-server-wrapper-2";
@@ -323,9 +327,9 @@ in
             };
             bash = {
               command = "bash-language-server";
-              args = ["start"];
-              filetypes = ["sh"];
-              ignoredRootPaths = ["~"];
+              args = [ "start" ];
+              filetypes = [ "sh" ];
+              ignoredRootPaths = [ "~" ];
             };
           };
         };
