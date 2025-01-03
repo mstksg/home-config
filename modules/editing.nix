@@ -391,7 +391,6 @@ in
           set updatetime=300
           set t_Co=256
           set termguicolors
-          set mouse=a
 
           " display options
           syntax on
