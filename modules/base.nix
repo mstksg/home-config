@@ -134,7 +134,7 @@ in
           };
       programs.fzf = {
         enable = true;
-        tmux.enableShellIntegration = true;
+        tmux.enableShellIntegration = false;
       };
 
       programs.zsh = {
