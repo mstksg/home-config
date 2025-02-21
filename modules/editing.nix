@@ -450,7 +450,7 @@ in
           vim-tmux-navigator
           vim-unimpaired
           vim-wordmotion
-        ] ++ lib.optional config.vim-ollama.enabled vim-ollama;
+        ] ++ lib.optional config.vim-ollama.enable vim-ollama;
         extraConfig = ''
           set encoding=utf-8
 
