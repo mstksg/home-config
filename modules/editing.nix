@@ -1,5 +1,6 @@
-{ pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
+  vimPythonEnv = pkgs.python3.withPackages (ps: with ps; [ requests httpx jinja2 ]);
   util = (import ./util.nix) { inherit pkgs; };
   simplePlugin = name: body: pkgs.vimUtils.buildVimPlugin {
     inherit name;
@@ -216,8 +217,44 @@ let
     };
     meta.homepage = "https://github.com/rupurt/vim-mql5";
   };
+  vim-ollama =
+    pkgs.vimUtils.buildVimPlugin {
+      pname = "vim-ollama";
+      version = "2025-02-15";
+      src = pkgs.fetchFromGitHub {
+        owner = "gergap";
+        repo = "vim-ollama";
+        rev = "e65d055877725495a1cb6c291af4213eec1371a3";
+        sha256 = "sha256-cAXyV2PhMf3sHUTG6WKbY3Sw2i3zUGbLPmTceZAV2Ts=";
+      };
+      meta.homepage = "https://github.com/gergap/vim-ollama";
+    };
 in
 {
+  options = {
+    vim-ollama = {
+      enabled = lib.mkOption {
+        type = lib.types.bool;
+        description = "Enable vim-ollama";
+        default = false;
+      };
+      code-model = lib.mkOption {
+        type = lib.types.str;
+        description = "Code model";
+        default = "codellama:13b-code";
+      };
+      chat-model = lib.mkOption {
+        type = lib.types.str;
+        description = "Chat model";
+        default = "llama3.1:8b";
+      };
+      edit-model = lib.mkOption {
+        type = lib.types.str;
+        description = "Edit model";
+        default = "qwen2.5-coder:7b";
+      };
+    };
+  };
   config = {
     home.packages = [
       (pkgs.writeShellScriptBin "haskell-language-server-wrapper-2" ''
@@ -333,6 +370,38 @@ in
             };
           };
         };
+      ".vim/config/ollama.vim".text =
+        ''
+          " Ollama base URL
+          let g:ollama_host = 'http://localhost:11434'
+          " tab completion model
+          let g:ollama_model = '${config.vim-ollama.code-model}'
+          " number of context lines to use for code completion
+          let g:ollama_context_lines = '512'
+          " debounce time to wait before triggering a completion
+          " let g:ollama_debounce_time = '300'
+          let g:ollama_model_options = { 'num_predict': 256 }
+
+          " chat model
+          let g:ollama_chat_model = '${config.vim-ollama.chat-model}'
+          let g:ollama_chat_options = {}
+          " override chat system prompt
+          let g:ollama_chat_systemprompt = 'Give concise, opinionated feedback, but do not criticize harshly.'
+
+          " edit model
+          let g:ollama_edit_model = '${config.vim-ollama.edit-model}'
+          " when disabled, LLM changs are applied directly. Useful when tracking changes via Git.
+          "let g:ollama_use_inline_diff = 0
+
+          " debug settings
+          "let g:ollama_debug = 4
+          " general log file location
+          let g:ollama_logfile = '/tmp/logs/vim-ollama.log'
+          " ollama chat conversation log
+          let g:ollama_review_logfile = '/tmp/logs/vim-ollama-review.log'
+
+          " vim: filetype=vim.ollama
+        '';
     };
     programs.vim =
       {
@@ -381,7 +450,7 @@ in
           vim-tmux-navigator
           vim-unimpaired
           vim-wordmotion
-        ];
+        ] ++ lib.optional config.vim-ollama.enabled vim-ollama;
         extraConfig = ''
           set encoding=utf-8
 
@@ -556,6 +625,9 @@ in
 
           autocmd FileType ledger setlocal commentstring=;\ %s
           autocmd FileType cabal setlocal foldmethod=indent
+
+          let g:python3_host_prog = "${vimPythonEnv}/bin/python3"
+          let $PYTHONPATH = "${vimPythonEnv}/lib/python3.12/site-packages"
         '';
       };
   };
