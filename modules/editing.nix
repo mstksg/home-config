@@ -233,7 +233,7 @@ in
 {
   options = {
     vim-ollama = {
-      enabled = lib.mkOption {
+      enable = lib.mkOption {
         type = lib.types.bool;
         description = "Enable vim-ollama";
         default = false;
