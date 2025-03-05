@@ -271,6 +271,7 @@ in
       '')
       pkgs.codespell
       pkgs.dhall-lsp-server
+      pkgs.ghc
       pkgs.haskellPackages.cabal-fmt
       pkgs.haskellPackages.fourmolu
       pkgs.nil
