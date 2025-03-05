@@ -269,6 +269,7 @@ in
           exit 1
         fi
       '')
+      pkgs.codespell
       pkgs.dhall-lsp-server
       pkgs.haskellPackages.cabal-fmt
       pkgs.haskellPackages.fourmolu
