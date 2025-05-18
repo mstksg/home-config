@@ -303,8 +303,9 @@ in
         shell = "${pkgs.fish}/bin/fish";
         tmuxp.enable = true;
         plugins = with pkgs.tmuxPlugins; [
-          fuzzback
           # cpu
+          # tmux-powerline
+          fuzzback
         ];
         extraConfig = ''
           bind | split-window -h -c '#{pane_current_path}'
