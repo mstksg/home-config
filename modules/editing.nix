@@ -419,6 +419,7 @@ in
           coc-fzf
           coc-git
           coc-nvim
+          coc-pretier
           coc-tsserver
           delimitMate
           dhall-vim
