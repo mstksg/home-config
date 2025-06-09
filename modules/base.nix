@@ -60,38 +60,38 @@ in
 
       # The home.packages option allows you to install Nix packages into your
       # environment.
-      home.packages = builtins.filter checkPlatform [
-        pkgs.binutils
-        pkgs.cachix
-        pkgs.cmatrix
-        pkgs.csvlens
-        pkgs.dhall
-        pkgs.fastfetch
-        pkgs.file
-        pkgs.fx
-        pkgs.fzf
-        pkgs.git-crypt
-        pkgs.glances
-        pkgs.hexyl
-        pkgs.httplz
-        pkgs.jq
-        pkgs.killall
-        pkgs.lolcat
-        pkgs.ncdu
-        pkgs.nix-prefetch-git
-        pkgs.nix-tree
-        pkgs.nixfmt-classic
-        pkgs.nixpkgs-fmt
-        pkgs.nodejs
-        pkgs.ripgrep
-        pkgs.rogue
-        pkgs.sl
-        pkgs.tldr
-        pkgs.tree
-        pkgs.unzip
-        pkgs.w3m
-        pkgs.wcalc
-        pkgs.wget
+      home.packages = with pkgs; builtins.filter checkPlatform [
+        binutils
+        cachix
+        cmatrix
+        csvlens
+        dhall
+        fastfetch
+        file
+        fx
+        fzf
+        git-crypt
+        glances
+        hexyl
+        httplz
+        jq
+        killall
+        lolcat
+        ncdu
+        nix-prefetch-git
+        nix-tree
+        nixfmt-classic
+        nixpkgs-fmt
+        nodejs
+        ripgrep
+        rogue
+        sl
+        tldr
+        tree
+        unzip
+        w3m
+        wcalc
+        wget
       ] ++
       [
         (pkgs.writeShellScriptBin "tmuxp-default" ''

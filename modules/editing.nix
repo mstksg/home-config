@@ -256,8 +256,8 @@ in
     };
   };
   config = {
-    home.packages = [
-      (pkgs.writeShellScriptBin "haskell-language-server-wrapper-2" ''
+    home.packages = with pkgs; [
+      (writeShellScriptBin "haskell-language-server-wrapper-2" ''
         if command -v haskell-language-server &> /dev/null
         then
           haskell-language-server "$@"
@@ -269,16 +269,17 @@ in
           exit 1
         fi
       '')
-      pkgs.codespell
-      pkgs.dhall-lsp-server
-      pkgs.ghc
-      pkgs.haskellPackages.cabal-fmt
-      pkgs.haskellPackages.fourmolu
-      pkgs.nil
-      pkgs.nodePackages.bash-language-server
-      pkgs.nodePackages.prettier
-      pkgs.ormolu
-      pkgs.shfmt
+      codespell
+      dhall-lsp-server
+      ghc
+      haskellPackages.cabal-fmt
+      haskellPackages.fourmolu
+      nil
+      tinymist
+      nodePackages.bash-language-server
+      nodePackages.prettier
+      ormolu
+      shfmt
     ];
     xdg.configFile."fourmolu.yaml".source = util.formatJson [ pkgs.yq ] "yq -y"
       {
@@ -369,6 +370,13 @@ in
               args = [ "start" ];
               filetypes = [ "sh" ];
               ignoredRootPaths = [ "~" ];
+            };
+            tinymist = {
+              command= "tinymist";
+              filetypes= ["typst"];
+              settings= { 
+                semanticTokens = "enable";
+              };
             };
           };
         };
