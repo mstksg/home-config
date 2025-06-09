@@ -322,8 +322,9 @@ in
           git.addGBlameToVirtualText = true;
           semanticTokens = {
             enable = true;
-            filetypes = [ "c" "cpp" "haskell" "nix" "purescript" "dhall" "bash" ];
+            filetypes = [ "c" "cpp" "haskell" "nix" "purescript" "dhall" "bash" "typst" ];
           };
+          prettier.formatterPriority = -1;
           languageserver = {
             haskell = {
               command = "haskell-language-server-wrapper-2";
@@ -372,9 +373,9 @@ in
               ignoredRootPaths = [ "~" ];
             };
             tinymist = {
-              command= "tinymist";
-              filetypes= ["typst"];
-              settings= { 
+              command = "tinymist";
+              filetypes = [ "typst" ];
+              settings = {
                 semanticTokens = "enable";
               };
             };
@@ -427,7 +428,7 @@ in
           coc-fzf
           coc-git
           coc-nvim
-          coc-pretier
+          coc-prettier
           coc-tsserver
           delimitMate
           dhall-vim
