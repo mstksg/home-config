@@ -275,11 +275,12 @@ in
       haskellPackages.cabal-fmt
       haskellPackages.fourmolu
       nil
-      tinymist
       nodePackages.bash-language-server
       nodePackages.prettier
       ormolu
       shfmt
+      tinymist
+      typstyle
     ];
     xdg.configFile."fourmolu.yaml".source = util.formatJson [ pkgs.yq ] "yq -y"
       {
