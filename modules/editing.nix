@@ -378,6 +378,7 @@ in
               filetypes = [ "typst" ];
               settings = {
                 semanticTokens = "enable";
+                formatterMode = "typstyle";
               };
             };
           };
