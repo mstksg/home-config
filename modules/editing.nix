@@ -609,6 +609,10 @@ in
           nnoremap <c-p> :FZF<CR>
           cabbrev wq w
 
+          noremap <leader>dt :Git difftool<CR>
+          " use `dp` (diff put) and :Gwrite when done to auto-close
+          noremap <leader>ds :Gvdiffsplit!<CR>
+
           noremap <leader>tt :tn<CR>
           noremap <leader>tp :tN<CR>
           noremap <leader>ws :%s/\s\+$//<CR>:nohlsearch<CR>
