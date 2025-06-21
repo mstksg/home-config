@@ -351,8 +351,8 @@ in
 
       services.gpg-agent = {
         enable = pkgs.hostPlatform.isLinux;
-        defaultCacheTtl = 7200;
-        defaultCacheTtlSsh = 7200;
+        defaultCacheTtl = 259200;
+        defaultCacheTtlSsh = 259200;
         pinentryPackage = pkgs.pinentry-curses;
       };
 
