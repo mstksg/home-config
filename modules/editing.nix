@@ -377,7 +377,7 @@ in
               command = "tinymist";
               filetypes = [ "typst" ];
               settings = {
-                semanticTokens = "enable";
+                # semanticTokens = "enable";
                 formatterMode = "typstyle";
               };
             };
