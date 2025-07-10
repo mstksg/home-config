@@ -279,7 +279,7 @@ in
       nodePackages.prettier
       ormolu
       shfmt
-      tinymist
+      # tinymist
       typstyle
     ];
     xdg.configFile."fourmolu.yaml".source = util.formatJson [ pkgs.yq ] "yq -y"
@@ -373,14 +373,14 @@ in
               filetypes = [ "sh" ];
               ignoredRootPaths = [ "~" ];
             };
-            tinymist = {
-              command = "tinymist";
-              filetypes = [ "typst" ];
-              settings = {
-                # semanticTokens = "enable";
-                formatterMode = "typstyle";
-              };
-            };
+            # tinymist = {
+            #   command = "tinymist";
+            #   filetypes = [ "typst" ];
+            #   settings = {
+            #     semanticTokens = "enable";
+            #     formatterMode = "typstyle";
+            #   };
+            # };
           };
         };
       ".vim/config/ollama.vim".text =
