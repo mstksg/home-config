@@ -92,6 +92,7 @@ in
         w3m
         wcalc
         wget
+        zip
       ] ++
       [
         (pkgs.writeShellScriptBin "tmuxp-default" ''
