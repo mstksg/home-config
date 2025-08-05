@@ -158,7 +158,7 @@ in
           utility.safeOps = true;
         };
 
-        initExtraFirst = ''
+        initContent = lib.mkBefore ''
           ${lib.strings.optionalString config.autoTmux ''
             [[ -o interactive ]] && [[ -z $NO_TMUX ]] && tmuxp-default
           ''}
@@ -350,12 +350,12 @@ in
 
       services.ssh-agent.enable = pkgs.hostPlatform.isLinux;
 
-      services.gpg-agent = {
-        enable = pkgs.hostPlatform.isLinux;
-        defaultCacheTtl = 259200;
-        defaultCacheTtlSsh = 259200;
-        pinentryPackage = pkgs.pinentry-curses;
-      };
+        services.gpg-agent = {
+          enable = pkgs.hostPlatform.isLinux;
+          defaultCacheTtl = 259200;
+          defaultCacheTtlSsh = 259200;
+          pinentry.package = pkgs.pinentry-curses;
+        };
 
       # You can also manage environment variables but you will have to manually
       # source
