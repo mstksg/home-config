@@ -73,10 +73,10 @@ in
         git-crypt
         glances
         hexyl
-        httplz
         jq
         killall
         lolcat
+        miniserve
         ncdu
         nix-prefetch-git
         nix-tree
