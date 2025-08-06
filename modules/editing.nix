@@ -467,6 +467,9 @@ in
           vim-wordmotion
         ] ++ lib.optional config.vim-ollama.enable vim-ollama;
         extraConfig = ''
+          let g:python3_host_prog = "${vimPythonEnv}/bin/python3"
+          let $PYTHONPATH = "${vimPythonEnv}/lib/python3.12/site-packages"
+
           set encoding=utf-8
 
           set nobackup
@@ -645,8 +648,6 @@ in
           autocmd FileType ledger setlocal commentstring=;\ %s
           autocmd FileType cabal setlocal foldmethod=indent
 
-          let g:python3_host_prog = "${vimPythonEnv}/bin/python3"
-          let $PYTHONPATH = "${vimPythonEnv}/lib/python3.12/site-packages"
         '';
       };
   };
