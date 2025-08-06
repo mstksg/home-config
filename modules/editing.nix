@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 let
   vimPythonEnv = pkgs.python3.withPackages (ps: with ps; [ requests httpx jinja2 ]);
+  vimPythonPath = "${vimPythonEnv}/${pkgs.python3.sitePackages}";
   util = (import ./util.nix) { inherit pkgs; };
   simplePlugin = name: body: pkgs.vimUtils.buildVimPlugin {
     inherit name;
@@ -467,6 +468,9 @@ in
           vim-wordmotion
         ] ++ lib.optional config.vim-ollama.enable vim-ollama;
         extraConfig = ''
+          let g:python3_host_prog = "${vimPythonEnv}/bin/python3"
+          let $PYTHONPATH = "${vimPythonPath}"
+
           set encoding=utf-8
 
           set nobackup
@@ -645,8 +649,6 @@ in
           autocmd FileType ledger setlocal commentstring=;\ %s
           autocmd FileType cabal setlocal foldmethod=indent
 
-          let g:python3_host_prog = "${vimPythonEnv}/bin/python3"
-          let $PYTHONPATH = "${vimPythonEnv}/lib/python3.12/site-packages"
         '';
       };
   };
