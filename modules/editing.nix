@@ -302,8 +302,8 @@ in
         fixities = [ ];
         reexports = [ ];
       };
-    home.file = {
-      ".vim/coc-settings.json".source = util.formatJson [ pkgs.jq ] "jq"
+    xdg.configFile = {
+      "nvim/coc-settings.json".source = util.formatJson [ pkgs.jq ] "jq"
         {
           coc.preferences.enableLinkedEditing = true;
           colors.enable = true;
@@ -383,7 +383,7 @@ in
             # };
           };
         };
-      ".vim/config/ollama.vim".text =
+      "nvim/config/ollama.vim".text =
         ''
           " Ollama base URL
           let g:ollama_host = 'http://localhost:11434'
@@ -416,11 +416,13 @@ in
           " vim: filetype=vim.ollama
         '';
     };
-    programs.vim =
+    programs.neovim =
       {
         enable = true;
         defaultEditor = true;
-        settings = { background = "dark"; };
+        viAlias = true;
+        vimAlias = true;
+        vimdiffAlias = true;
         plugins = with pkgs.vimPlugins; [
           NrrwRgn
           awesome-vim-colorschemes
@@ -437,7 +439,6 @@ in
           fzf-vim
           haskell-vim
           purescript-vim
-          syntastic
           tagbar
           utilPlugins.coc-bindings
           utilPlugins.vimfile-locations
@@ -458,7 +459,6 @@ in
           vim-pandoc-syntax
           vim-pug
           vim-repeat
-          vim-sensible
           vim-signature
           vim-startify
           vim-surround
@@ -467,13 +467,12 @@ in
           vim-wordmotion
         ] ++ lib.optional config.vim-ollama.enable vim-ollama;
         extraConfig = ''
-          set encoding=utf-8
+          set background=dark
 
           set nobackup
           set nowritebackup
 
           set updatetime=300
-          set t_Co=256
           set termguicolors
 
           " display options
@@ -488,7 +487,6 @@ in
           set foldlevelstart=20
           set foldcolumn=1
           set foldmethod=syntax
-          set t_Co=256
           set showcmd
           set relativenumber
           autocmd InsertEnter,InsertLeave * set cul!
@@ -570,7 +568,7 @@ in
           " noremap <F12> :ls<CR>:b<SPACE>
           " autocmd CmdwinEnter * nnoremap <buffer> <cr> <cr>
           " autocmd FileType qf nnoremap <buffer> <cr> <cr>
-          " noremap <leader>ev :e! ~/.vimrc<CR>
+          " noremap <leader>ev :e! ~/.config/nvim/init.vim<CR>
           noremap <leader>twr :normal gqip<CR>
           " noremap <leader>todo :vsp! ~/todo.txt<CR>
           " vmap <leader>sl "ry:call Send_to_Tmux(@r)<CR>
