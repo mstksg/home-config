@@ -230,6 +230,19 @@ let
       };
       meta.homepage = "https://github.com/gergap/vim-ollama";
     };
+    haskell-language-server-wrapper-2 =
+      pkgs.writeShellScriptBin "haskell-language-server-wrapper-2" ''
+        if command -v haskell-language-server &> /dev/null
+        then
+          haskell-language-server "$@"
+        elif command -v haskell-language-server-wrapper &> /dev/null
+        then
+          haskell-language-server-wrapper "$@"
+        else
+          echo "Neither haskell-language-server nor haskell-language-server-wrapper found."
+          exit 1
+        fi
+      '';
 in
 {
   options = {
@@ -258,21 +271,10 @@ in
   };
   config = {
     home.packages = with pkgs; [
-      (writeShellScriptBin "haskell-language-server-wrapper-2" ''
-        if command -v haskell-language-server &> /dev/null
-        then
-          haskell-language-server "$@"
-        elif command -v haskell-language-server-wrapper &> /dev/null
-        then
-          haskell-language-server-wrapper "$@"
-        else
-          echo "Neither haskell-language-server nor haskell-language-server-wrapper found."
-          exit 1
-        fi
-      '')
       codespell
       dhall-lsp-server
       ghc
+      haskell-language-server-wrapper-2
       haskellPackages.cabal-fmt
       haskellPackages.fourmolu
       nil
@@ -280,7 +282,7 @@ in
       nodePackages.prettier
       ormolu
       shfmt
-      # tinymist
+      treesitter
       typstyle
     ];
     xdg.configFile."fourmolu.yaml".source = util.formatJson [ pkgs.yq ] "yq -y"
