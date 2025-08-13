@@ -282,7 +282,7 @@ in
       nodePackages.prettier
       ormolu
       shfmt
-      treesitter
+      treefmt
       typstyle
     ];
     xdg.configFile."fourmolu.yaml".source = util.formatJson [ pkgs.yq ] "yq -y"
