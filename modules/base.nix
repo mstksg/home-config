@@ -83,6 +83,7 @@ in
         nixfmt-classic
         nixpkgs-fmt
         nodejs
+        pv
         ripgrep
         rogue
         sl
