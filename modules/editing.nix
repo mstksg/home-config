@@ -614,6 +614,8 @@ in
           " nnoremap <CR> :nohlsearch<CR>
           nnoremap <c-p> :FZF<CR>
           cabbrev wq w
+          command! -range=% Cat <line1>,<line2>w !cat
+          vnoremap <leader>c :Cat<CR>
 
           noremap <leader>dt :Git difftool<CR>
           " use `dp` (diff put) and :Gwrite when done to auto-close
