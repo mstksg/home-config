@@ -271,6 +271,8 @@ in
   };
   config = {
     home.packages = with pkgs; [
+      ast-grep
+      clang-tools
       codespell
       dhall-lsp-server
       ghc
