@@ -363,8 +363,9 @@ in
               settings = {
                 purescript = {
                   addSpagoSources = true;
-                  addNpmPath = false;
+                  addNpmPath = true;
                   formatter = "purs-tidy";
+                  buildCommand = "spago build --purs-args --json-errors";
                 };
               };
             };
