@@ -365,7 +365,7 @@ in
                   addSpagoSources = true;
                   addNpmPath = true;
                   formatter = "purs-tidy";
-                  buildCommand = "spago build --purs-args --json-errors";
+                  buildCommand = "spago build --json-errors";
                 };
               };
             };
