@@ -246,6 +246,11 @@ let
 in
 {
   options = {
+    dhall-lsp-server = lib.mkOption {
+      type = lib.types.package;
+      description = "dhall-lsp-server binary";
+      default = pkgs.dhall-lsp-server;
+    };
     vim-ollama = {
       enable = lib.mkOption {
         type = lib.types.bool;
@@ -273,8 +278,7 @@ in
     home.packages = with pkgs; [
       ast-grep
       clang-tools
-      codespell
-      dhall-lsp-server
+      config.dhall-lsp-server
       ghc
       haskell-language-server-wrapper-2
       haskellPackages.cabal-fmt
