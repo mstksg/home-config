@@ -65,7 +65,6 @@ in
         cachix
         cmatrix
         csvlens
-        dhall
         fastfetch
         file
         fx
