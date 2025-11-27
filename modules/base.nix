@@ -223,52 +223,54 @@ in
 
       programs.git = {
         enable = true;
-        userName = config.user;
-        userEmail = config.email;
         lfs.enable = true;
         signing = {
           key = config.gpgSignKey;
           signByDefault = config.gpgSignKey != null;
         };
-        aliases = {
-          st = "status";
-          lg = "log --oneline --abbrev-commit --all --graph --decorate --color";
-          sha = "rev-parse HEAD";
-          last = "log -1 HEAD --stat";
-          commit-now = "!git commit -m $(date --iso-8601=seconds)";
-        };
-        delta = {
-          enable = true;
-          options = {
-            navigate = true;
-            light = false;
-            dark = true;
-            side-by-side = false;
-            line-numbers = true;
-            features = "zebra-dark";
-            # this isn't in the RTP for some reason so we clone it from
-            # https://github.com/dandavison/delta/blob/main/themes.gitconfig
-            zebra-dark = {
-              minus-style = "syntax \"#330f0f\"";
-              minus-emph-style = "syntax \"#4f1917\"";
-              plus-style = "syntax \"#0e2f19\"";
-              plus-emph-style = "syntax \"#174525\"";
-              map-styles = ''
-                bold purple => syntax "#330f29",
-                bold blue => syntax "#271344",
-                bold cyan => syntax "#0d3531",
-                bold yellow => syntax "#222f14"
-              '';
-              zero-style = "syntax";
-              whitespace-error-style = "#aaaaaa";
-            };
+        settings = {
+          user.name = config.user;
+          user.email = config.email;
+          alias = {
+            st = "status";
+            lg = "log --oneline --abbrev-commit --all --graph --decorate --color";
+            sha = "rev-parse HEAD";
+            last = "log -1 HEAD --stat";
+            commit-now = "!git commit -m $(date --iso-8601=seconds)";
           };
-        };
-        extraConfig = {
           init.defaultBranch = "main";
           core.editor = "vim";
           merge.conflictstyle = "diff3";
           diff.colorMoved = "default";
+        };
+      };
+
+      programs.delta = {
+        enable = true;
+        enableGitIntegration = true;
+        options = {
+          navigate = true;
+          light = false;
+          dark = true;
+          side-by-side = false;
+          line-numbers = true;
+          features = "zebra-dark";
+          # this isn't in the RTP for some reason so we clone it from
+          # https://github.com/dandavison/delta/blob/main/themes.gitconfig
+          zebra-dark = {
+            minus-style = "syntax \"#330f0f\"";
+            minus-emph-style = "syntax \"#4f1917\"";
+            plus-style = "syntax \"#0e2f19\"";
+            plus-emph-style = "syntax \"#174525\"";
+            map-styles = ''
+              bold purple => syntax "#330f29",
+              bold blue => syntax "#271344",
+              bold cyan => syntax "#0d3531",
+              bold yellow => syntax "#222f14"
+            '';
+            zero-style = "syntax";
+            whitespace-error-style = "#aaaaaa";
+          };
         };
       };
 
