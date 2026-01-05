@@ -77,6 +77,7 @@ in
         lolcat
         miniserve
         ncdu
+        nix-inspect
         nix-prefetch-git
         nix-tree
         nixfmt-classic
