@@ -61,6 +61,7 @@ in
       # The home.packages option allows you to install Nix packages into your
       # environment.
       home.packages = with pkgs; builtins.filter checkPlatform [
+        # rogue
         binutils
         cachix
         cmatrix
@@ -85,7 +86,6 @@ in
         nodejs
         pv
         ripgrep
-        rogue
         sl
         tldr
         tree
