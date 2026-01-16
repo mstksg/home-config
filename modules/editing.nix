@@ -225,8 +225,8 @@ let
       src = pkgs.fetchFromGitHub {
         owner = "gergap";
         repo = "vim-ollama";
-        rev = "120e57bbfc6def72adf23320db283664f42a6cbe";
-        sha256 = "sha256-5mdL6MPD4TYhiFxZeLdMCN0jd1DW/m+wZ/i7p/S62FI=";
+        rev = "5bdc962b09875e9429d456283b94477ffe03a184";
+        sha256 = "sha256-AM7Cgr0QWWQByICOODlgLtdCWCym48wHuqp4djxRa4g=";
       };
       meta.homepage = "https://github.com/gergap/vim-ollama";
     };
