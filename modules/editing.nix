@@ -441,7 +441,6 @@ in
           coc-git
           coc-nvim
           coc-prettier
-          coc-tsserver
           delimitMate
           dhall-vim
           fzf-vim
