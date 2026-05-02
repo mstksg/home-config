@@ -37,8 +37,13 @@ in
     };
     gpgSignKey = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
-      description = "Require gpg signing for this key (email) for git and other relevant places.";
+      description = "GPG key (email) to use for git signing and other relevant places.";
       default = null;
+    };
+    gpgSignByDefault = lib.mkOption {
+      type = lib.types.bool;
+      description = "Whether to sign git commits by default.";
+      default = false;
     };
   };
 
@@ -227,7 +232,7 @@ in
         lfs.enable = true;
         signing = {
           key = config.gpgSignKey;
-          signByDefault = config.gpgSignKey != null;
+          signByDefault = config.gpgSignByDefault;
         };
         settings = {
           user = {
