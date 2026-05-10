@@ -104,6 +104,39 @@ in
         (pkgs.writeShellScriptBin "tmuxp-default" ''
           [[ -t 0 ]] && [[ -z $NO_TMUX ]] && [[ -z $TMUX ]] && tmuxp load --yes default
         '')
+        (pkgs.writeShellScriptBin "tmux-session-bar" ''
+          if ! command -v tmux >/dev/null 2>&1; then
+            exit 0
+          fi
+
+          current="$(tmux display-message -p '#S' 2>/dev/null || true)"
+          tmux list-sessions -F '#S' 2>/dev/null | awk -v cur="$current" '
+            NF == 0 { next }
+            {
+              idx = NR - 1
+              sep = (NR == 1 ? "" : "  ")
+              if ($0 == cur) {
+                printf "%s#[reverse]%d:%s#[noreverse]", sep, idx, $0
+              } else {
+                printf "%s%d:%s", sep, idx, $0
+              }
+            }
+          '
+        '')
+        (pkgs.writeShellScriptBin "tmux-switch-session-index" ''
+          if ! command -v tmux >/dev/null 2>&1; then
+            exit 0
+          fi
+
+          idx="''${1:-}"
+          [[ "$idx" =~ ^[0-9]$ ]] || exit 0
+
+          line="$((idx + 1))"
+          target="$(tmux list-sessions -F '#S' 2>/dev/null | sed -n "''${line}p" || true)"
+          [[ -z "$target" ]] && exit 0
+
+          tmux switch-client -t "$target" 2>/dev/null || true
+        '')
         (pkgs.writeShellScriptBin "y" ''
           echo "y not?"
         '')
@@ -331,12 +364,29 @@ in
           bind-key C-a last-window
           bind-key a send-prefix
 
+          bind-key M-0 run-shell "tmux-switch-session-index 0"
+          bind-key M-1 run-shell "tmux-switch-session-index 1"
+          bind-key M-2 run-shell "tmux-switch-session-index 2"
+          bind-key M-3 run-shell "tmux-switch-session-index 3"
+          bind-key M-4 run-shell "tmux-switch-session-index 4"
+          bind-key M-5 run-shell "tmux-switch-session-index 5"
+          bind-key M-6 run-shell "tmux-switch-session-index 6"
+          bind-key M-7 run-shell "tmux-switch-session-index 7"
+          bind-key M-8 run-shell "tmux-switch-session-index 8"
+          bind-key M-9 run-shell "tmux-switch-session-index 9"
+          bind-key M-n switch-client -n
+          bind-key M-p switch-client -p
+
           set -g status-justify left
           set -g status-bg black
           set -g status-fg white
+          set -g status on
+          set -g status-format[0] "#[list=on]#(tmux-session-bar)#[list=off]  #[default]❯  #{W:#{E:window-status-format} ,#{E:window-status-current-format} }#[align=right]#{E:status-right}"
           set -g status-left ""
+          set -g status-left-length 0
           # set -g status-right "#{sysstat_cpu} | #{sysstat_mem} | #{sysstat_swap} | #{sysstat_loadavg} | #[fg=cyan]#(echo $USER)#[default]@#H"
           set -g status-right "#[fg=green]#H #[fg=default]| #[fg=cyan]%b %d %R"
+          set -g status-right-length 80
 
           set-window-option -g window-status-style dim
           set-window-option -g window-status-current-style bright
