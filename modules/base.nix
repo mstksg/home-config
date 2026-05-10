@@ -115,13 +115,16 @@ in
 
           printf "%s" "$sessions" | awk -v cur="$current" '
             NF == 0 { next }
-            {
-              idx = NR - 1
-              sep = (NR == 1 ? "" : "  ")
-              if ($0 == cur) {
-                printf "%s#[reverse]%d:%s#[noreverse]", sep, idx, $0
-              } else {
-                printf "%s%d:%s", sep, idx, $0
+            { a[++n] = $0 }
+            END {
+              for (i = n; i >= 1; i--) {
+                idx = n - i
+                sep = (i == n ? "" : "  ")
+                if (a[i] == cur) {
+                  printf "%s#[reverse]%d:%s#[noreverse]", sep, idx, a[i]
+                } else {
+                  printf "%s%d:%s", sep, idx, a[i]
+                }
               }
             }
           '
@@ -135,7 +138,12 @@ in
           [[ "$idx" =~ ^[0-9]$ ]] || exit 0
 
           line="$((idx + 1))"
-          target="$(tmux list-sessions -F '#S' 2>/dev/null | sed -n "''${line}p" || true)"
+          target="$(
+            tmux list-sessions -F '#S' 2>/dev/null | awk '
+              { a[++n] = $0 }
+              END { for (i = n; i >= 1; i--) print a[i] }
+            ' | sed -n "''${line}p" || true
+          )"
           [[ -z "$target" ]] && exit 0
 
           tmux switch-client -t "$target" 2>/dev/null || true
