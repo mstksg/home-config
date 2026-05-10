@@ -384,6 +384,7 @@ in
           set -g status-justify left
           set -g status-bg black
           set -g status-fg white
+          set -g detach-on-destroy off
           set -g status on
           set -g status-left "#(tmux-session-bar)  #[default]❯ "
           set -g status-left-length 200
