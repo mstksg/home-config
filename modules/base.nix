@@ -110,7 +110,10 @@ in
           fi
 
           current="$(tmux display-message -p '#S' 2>/dev/null || true)"
-          tmux list-sessions -F '#S' 2>/dev/null | awk -v cur="$current" '
+          sessions="$(tmux list-sessions -F '#S' 2>/dev/null || true)"
+          [[ -z "$sessions" ]] && printf "%s" "(no sessions)" && exit 0
+
+          printf "%s" "$sessions" | awk -v cur="$current" '
             NF == 0 { next }
             {
               idx = NR - 1
@@ -374,8 +377,9 @@ in
           bind-key M-7 run-shell "tmux-switch-session-index 7"
           bind-key M-8 run-shell "tmux-switch-session-index 8"
           bind-key M-9 run-shell "tmux-switch-session-index 9"
-          bind-key M-n switch-client -n
-          bind-key M-p switch-client -p
+
+          bind-key N command-prompt -p "new session:" "new-session -s '%%'"
+          bind-key M command-prompt -p "move window to new session:" "new-session -d -s '%%' \\; move-window -t '%%:' \\; switch-client -t '%%'"
 
           set -g status-justify left
           set -g status-bg black
