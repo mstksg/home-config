@@ -381,9 +381,8 @@ in
           set -g status-bg black
           set -g status-fg white
           set -g status on
-          set -g status-format[0] "#[list=on]#(tmux-session-bar)#[list=off]  #[default]❯  #{W:#{E:window-status-format} ,#{E:window-status-current-format} }#[align=right]#{E:status-right}"
-          set -g status-left ""
-          set -g status-left-length 0
+          set -g status-left "#(tmux-session-bar)  #[default]❯ "
+          set -g status-left-length 200
           # set -g status-right "#{sysstat_cpu} | #{sysstat_mem} | #{sysstat_swap} | #{sysstat_loadavg} | #[fg=cyan]#(echo $USER)#[default]@#H"
           set -g status-right "#[fg=green]#H #[fg=default]| #[fg=cyan]%b %d %R"
           set -g status-right-length 80
