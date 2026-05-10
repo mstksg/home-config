@@ -168,7 +168,7 @@ in
       xdg.configFile."tmuxp/default.yaml".source =
         util.formatJson [ pkgs.yq ] "yq -y"
           {
-            session_name = "default";
+            session_name = "main";
             windows = [
               { window_name = "htop"; panes = [ "glances" ]; }
             ] ++ config.extraTmuxWindows ++ [
