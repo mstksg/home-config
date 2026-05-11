@@ -35,6 +35,11 @@ in
       description = "Extra tmux windows to load on the default pane, in tmuxp format";
       default = [ ];
     };
+    multiSessionTmux = lib.mkOption {
+      type = lib.types.bool;
+      description = "Enable multi-session tmux UI (session bar + session switching keybinds).";
+      default = false;
+    };
     gpgSignKey = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       description = "GPG key (email) to use for git signing and other relevant places.";
@@ -104,6 +109,10 @@ in
         (pkgs.writeShellScriptBin "tmuxp-default" ''
           [[ -t 0 ]] && [[ -z $NO_TMUX ]] && [[ -z $TMUX ]] && tmuxp load --yes default
         '')
+        (pkgs.writeShellScriptBin "y" ''
+          echo "y not?"
+        '')
+      ] ++ lib.optionals config.multiSessionTmux [
         (pkgs.writeShellScriptBin "tmux-session-bar" ''
           if ! command -v tmux >/dev/null 2>&1; then
             exit 0
@@ -147,9 +156,6 @@ in
           [[ -z "$target" ]] && exit 0
 
           tmux switch-client -t "$target" 2>/dev/null || true
-        '')
-        (pkgs.writeShellScriptBin "y" ''
-          echo "y not?"
         '')
       ];
 
@@ -375,27 +381,31 @@ in
           bind-key C-a last-window
           bind-key a send-prefix
 
-          bind-key M-0 run-shell "tmux-switch-session-index 0"
-          bind-key M-1 run-shell "tmux-switch-session-index 1"
-          bind-key M-2 run-shell "tmux-switch-session-index 2"
-          bind-key M-3 run-shell "tmux-switch-session-index 3"
-          bind-key M-4 run-shell "tmux-switch-session-index 4"
-          bind-key M-5 run-shell "tmux-switch-session-index 5"
-          bind-key M-6 run-shell "tmux-switch-session-index 6"
-          bind-key M-7 run-shell "tmux-switch-session-index 7"
-          bind-key M-8 run-shell "tmux-switch-session-index 8"
-          bind-key M-9 run-shell "tmux-switch-session-index 9"
+          ${lib.optionalString config.multiSessionTmux ''
+            bind-key M-0 run-shell "tmux-switch-session-index 0"
+            bind-key M-1 run-shell "tmux-switch-session-index 1"
+            bind-key M-2 run-shell "tmux-switch-session-index 2"
+            bind-key M-3 run-shell "tmux-switch-session-index 3"
+            bind-key M-4 run-shell "tmux-switch-session-index 4"
+            bind-key M-5 run-shell "tmux-switch-session-index 5"
+            bind-key M-6 run-shell "tmux-switch-session-index 6"
+            bind-key M-7 run-shell "tmux-switch-session-index 7"
+            bind-key M-8 run-shell "tmux-switch-session-index 8"
+            bind-key M-9 run-shell "tmux-switch-session-index 9"
 
-          bind-key N command-prompt -p "new session:" "new-session -s '%%'"
-          bind-key M command-prompt -p "move window to new session:" "new-session -d -s '%%' \\; move-window -t '%%:' \\; switch-client -t '%%'"
+            bind-key N command-prompt -p "new session:" "new-session -s '%%'"
+            bind-key M command-prompt -p "move window to new session:" "new-session -d -s '%%' \\; move-window -t '%%:' \\; switch-client -t '%%'"
+          ''}
 
           set -g status-justify left
           set -g status-bg black
           set -g status-fg white
-          set -g detach-on-destroy off
           set -g status on
-          set -g status-left "#(tmux-session-bar)  #[default]❯ "
-          set -g status-left-length 200
+          ${lib.optionalString config.multiSessionTmux ''
+            set -g detach-on-destroy off
+            set -g status-left "#(tmux-session-bar)  #[default]❯ "
+            set -g status-left-length 200
+          ''}
           # set -g status-right "#{sysstat_cpu} | #{sysstat_mem} | #{sysstat_swap} | #{sysstat_loadavg} | #[fg=cyan]#(echo $USER)#[default]@#H"
           set -g status-right "#[fg=green]#H #[fg=default]| #[fg=cyan]%b %d %R"
           set -g status-right-length 80
