@@ -241,6 +241,7 @@ in
   config = {
     home.packages = with pkgs; [
       ast-grep
+      bash-language-server
       clang-tools
       config.dhall-lsp-server
       ghc
@@ -248,9 +249,8 @@ in
       haskellPackages.cabal-fmt
       haskellPackages.fourmolu
       nil
-      nodePackages.bash-language-server
-      nodePackages.prettier
       ormolu
+      prettier
       shfmt
       treefmt
       typstyle
