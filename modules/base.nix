@@ -397,6 +397,7 @@ in
             bind-key M command-prompt -p "move window to new session:" "new-session -d -s '%%' \\; move-window -t '%%:' \\; switch-client -t '%%'"
           ''}
 
+          set -g focus-events on
           set -g status-justify left
           set -g status-bg black
           set -g status-fg white
