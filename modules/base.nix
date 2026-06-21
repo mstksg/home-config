@@ -418,7 +418,6 @@ in
           set -g visual-activity on
 
           set -ga terminal-overrides ',*256col*:Tc'
-          set -g focus-events on
         '';
       };
 
