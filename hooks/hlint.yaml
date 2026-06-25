@@ -1,0 +1,27 @@
+- error: {name: Avoid restricted function}
+
+- functions:
+  # Partial functions that can crash
+  - {name: Prelude.error, within: [], message: "use throwIO/userError or fail if in IO. if in pure code, use GHC.Err.error if you must, but only for impossible or unrecoverable codepaths"}
+  - {name: Prelude.undefined, within: [], message: "Use a typed hole _ or an explicit error with context"}
+  - {name: Prelude.head, within: [], message: "Pattern match or use listToMaybe/headMay"}
+  - {name: Prelude.tail, within: [], message: "Pattern match or handle safely instead, like drop 1. Will be an error in GHC 9.8."}
+  - {name: Prelude.init, within: [], message: "Pattern match or handle safely"}
+  - {name: Prelude.last, within: [], message: "Pattern match or use lastMay"}
+  - {name: Prelude.!!, within: [], message: "Use atMay or safe indexing"}
+  - {name: Prelude.read, within: [], message: "Use readMaybe or a proper parser"}
+  - {name: Data.List.head, within: [], message: "Pattern match or use listToMaybe/headMay"}
+  - {name: Data.List.tail, within: [], message: "Pattern match or handle safely instead, like drop 1. Will be an error in GHC 9.8."}
+  - {name: Data.List.init, within: [], message: "Pattern match or handle safely"}
+  - {name: Data.List.last, within: [], message: "Pattern match or use lastMay"}
+  - {name: Data.List.!!, within: [], message: "Use atMay or safe indexing"}
+  - {name: Data.Maybe.fromJust, within: [], message: "Use pattern matching, traverse/for, or an explicit error if you must."}
+  - {name: Control.Exception.throw, within: [], message: "Use throwIO in IO, or impreciseThrow/throw with clear documentation if you must throw from pure code"}
+
+  # Performance footguns
+  - {name: Data.List.nub, within: [], message: "Use Data.Containers.ListUtils.nubOrd"}
+  - {name: Data.List.nubBy, within: [], message: "Use Data.Containers.ListUtils.nubOrdOn"}
+
+  # Pulsar-specific API preferences
+  - {name: Control.Concurrent.threadDelay, within: [], message: "Use Data.Time.Fixed.sleepSeconds or Data.Time.Fixed.sleepFor"}
+  - {name: System.Timeout.timeout, within: [], message: "Use Data.Time.Fixed.timeoutSeconds or Data.Time.Fixed.timeout"}

@@ -433,6 +433,8 @@ in
           set showcmd
           set relativenumber
           autocmd InsertEnter,InsertLeave * set cul!
+          autocmd WinEnter,BufEnter,FocusGained * set relativenumber
+          autocmd WinLeave,BufLeave,FocusLost * set norelativenumber
           " match ErrorMsg '\%>80v.\+'
           set showbreak =\ ++\ \ \
           set linebreak
