@@ -36,7 +36,7 @@ fi
 
 # Check for HLINT ignore pragmas in Haskell files
 if [[ "$file_path" == *.hs ]]; then
-    if echo "$content" | grep -qiP '\{-#\s*HLINT\s+ignore'; then
+    if echo "$content" | grep -qiP '\{-#?\s*HLINT\s+ignore'; then
         cat >&2 <<'EOF'
 Blocked: Do not use {-# HLINT ignore #-} pragmas. This is requirements-circumventing behavior - you are trying to suppress lint rules inline instead of fixing your code. Ask the user if you think a rule is wrong.
 EOF

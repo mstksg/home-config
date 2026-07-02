@@ -84,6 +84,12 @@ if echo "$cmd" | grep -qP '(?:^|&&\s*|;\s*|\|\s*|\|\|\s*)(?:npx|pip|pip3)\b'; th
   exit 2
 fi
 
+# Block kubectl
+if echo "$cmd" | grep -qP '(?:^|&&\s*|;\s*|\|\s*|\|\|\s*)kubectl\b'; then
+  echo 'kubectl is blocked. Do not run kubectl commands.' >&2
+  exit 2
+fi
+
 # Block git diff with two-dot notation (require three-dot)
 if echo "$cmd" | grep -qP '(?:^|&&\s*|;\s*|\|\s*|\|\|\s*)git diff\b.*[^\.]\.\.(?!\.)'; then
   echo 'git diff with two-dot (..) is blocked. Always use three-dot (...) notation.' >&2
