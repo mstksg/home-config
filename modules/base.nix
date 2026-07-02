@@ -367,6 +367,7 @@ in
           # cpu
           # tmux-powerline
           fuzzback
+          vim-tmux-navigator
         ];
         extraConfig = ''
           bind | split-window -h -c '#{pane_current_path}'
