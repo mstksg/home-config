@@ -60,7 +60,7 @@ EOF
     fi
     if echo "$content" | grep -qP 'OPTIONS_GHC'; then
         cat >&2 <<'EOF'
-Blocked: Do not add OPTIONS_GHC pragmas. This is requirements-circumventing behavior - you are trying to disable warnings or change compiler behavior instead of fixing your code. Ask the user if you think a GHC option is needed.
+Blocked: Do not add OPTIONS_GHC pragmas. This is requirements-circumventing behavior - you are trying to disable warnings instead of fixing your code. Do NOT work around this by putting the option in cabal files, per-module ghc-options, or any other mechanism. If you believe the warning is unfixable, STOP and ask the user. Do not suppress it by any means.
 EOF
         exit 2
     fi

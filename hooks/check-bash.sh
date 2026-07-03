@@ -17,10 +17,11 @@ if echo "$cmd" | grep -qP '(?:^|&&\s*|;\s*|\|\s*|\|\|\s*)git commit\b.*--amend';
   exit 2
 fi
 
-# Block git commit with HEREDOC body
+# Block git commit with multi-line message
 if echo "$cmd" | grep -qP '(?:^|&&\s*|;\s*|\|\s*|\|\|\s*)git commit\b'; then
-  if echo "$cmd" | grep -qP '\$\(cat\s*<<'; then
-    echo 'git commit with HEREDOC message is blocked. Use a simple -m "message" instead.' >&2
+  linecount=$(echo "$cmd" | wc -l)
+  if [ "$linecount" -gt 1 ]; then
+    echo 'git commit with multi-line message is blocked. Use a single-line commit message.' >&2
     exit 2
   fi
 fi
