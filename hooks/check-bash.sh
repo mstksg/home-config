@@ -32,6 +32,14 @@ if echo "$cmd" | grep -qP '\|\s*tail\b'; then
   exit 2
 fi
 
+# Block piping build command output (agents grep away their own errors)
+if echo "$cmd" | grep -qP '(?:cabal\s+build|nix\s+build|nix-shell\s+--run)'; then
+  if echo "$cmd" | grep -qP '\|'; then
+    echo 'Piping build command output is blocked. You must see the full output. If output is too long, run as a background process and read the results file with offset/limit.' >&2
+    exit 2
+  fi
+fi
+
 # Block sed -i (agents always nuke files with this)
 if echo "$cmd" | grep -qP '(?:^\s*|&&\s*|;\s*|\|\s*|\|\|\s*)sed\s+-\S*i'; then
   echo 'sed -i is blocked. Use the Edit tool instead. You have never once succeeded with sed -i.' >&2

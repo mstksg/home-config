@@ -17,14 +17,6 @@ else
     exit 0
 fi
 
-# Check for circled unicode numbers (U+2460-U+24FF Enclosed Alphanumerics)
-if echo "$content" | grep -P '[\x{2460}-\x{24FF}]' >/dev/null 2>&1; then
-    cat >&2 <<EOF
-Blocked: You used circled unicode numbers. These are stupid. The user thinks they are stupid. Use normal numbers like a normal person.
-EOF
-    exit 2
-fi
-
 # Block edits to hlint config files
 file_path=$(echo "$input" | $JQ -r '.tool_input.file_path // empty')
 if [[ "$file_path" == *hlint* && ( "$file_path" == *.yaml || "$file_path" == *.yml ) ]]; then
@@ -57,6 +49,53 @@ EOF
 Blocked: Do not use unsafeCoerce. This is requirements-circumventing behavior - you are bypassing the type checker instead of solving the actual problem. If you cannot satisfy the types, ask the user how to proceed.
 EOF
         exit 2
+    fi
+    # Block adding/removing comments (only in work projects)
+    if [[ -n "${CLAUDE_COMMENT_MORATORIUM:-}" ]] && { echo "$content" | grep -qP '^\s*--(?!\s*\||\s*\^)' || echo "$content" | grep -qP '\{-(?!#)'; }; then
+        # For Edit, only block if the comment is NEW (not preserved from old_string)
+        if [[ "$tool_name" == "Edit" ]]; then
+            old_string=$(echo "$input" | $JQ -r '.tool_input.old_string // empty')
+            new_comments=$(echo "$content" | grep -P '^\s*--(?!\s*\||\s*\^)' || true)
+            old_comments=$(echo "$old_string" | grep -P '^\s*--(?!\s*\||\s*\^)' || true)
+            # Check for added comments
+            added=$(comm -23 <(echo "$new_comments" | sort) <(echo "$old_comments" | sort))
+            if [[ -n "$added" ]]; then
+                cat >&2 <<'EOF'
+Blocked: Do not add comments. The user has a moratorium on LLM-written comments.
+EOF
+                exit 2
+            fi
+            # Check for removed comments
+            removed=$(comm -23 <(echo "$old_comments" | sort) <(echo "$new_comments" | sort))
+            if [[ -n "$removed" ]]; then
+                cat >&2 <<'EOF'
+Blocked: Do not remove or delete existing comments. Preserve all comments exactly as they are.
+EOF
+                exit 2
+            fi
+            # Same check for block comments
+            new_block=$(echo "$content" | grep -P '\{-(?!#)' || true)
+            old_block=$(echo "$old_string" | grep -P '\{-(?!#)' || true)
+            added_block=$(comm -23 <(echo "$new_block" | sort) <(echo "$old_block" | sort))
+            if [[ -n "$added_block" ]]; then
+                cat >&2 <<'EOF'
+Blocked: Do not add comments. The user has a moratorium on LLM-written comments.
+EOF
+                exit 2
+            fi
+            removed_block=$(comm -23 <(echo "$old_block" | sort) <(echo "$new_block" | sort))
+            if [[ -n "$removed_block" ]]; then
+                cat >&2 <<'EOF'
+Blocked: Do not remove or delete existing comments. Preserve all comments exactly as they are.
+EOF
+                exit 2
+            fi
+        elif [[ "$tool_name" == "Write" ]]; then
+            cat >&2 <<'EOF'
+Blocked: Do not add comments. The user has a moratorium on LLM-written comments.
+EOF
+            exit 2
+        fi
     fi
     if echo "$content" | grep -qP 'OPTIONS_GHC'; then
         cat >&2 <<'EOF'
