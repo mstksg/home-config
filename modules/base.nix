@@ -91,7 +91,7 @@ in
         nix-inspect
         nix-prefetch-git
         nix-tree
-        nixfmt
+        nixfmt-classic
         nixpkgs-fmt
         nodejs
         pv
