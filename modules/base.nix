@@ -370,9 +370,23 @@ in
           vim-tmux-navigator
         ];
         extraConfig = ''
-          bind | split-window -h -c '#{pane_current_path}'
-          bind - split-window -v -c '#{pane_current_path}'
-          bind \\ split-window -h -c '#{pane_current_path}' \; resize-pane -R 30
+          # Splitting a zoomed pane silently un-zooms the window, which is never
+          # what was intended: refuse instead.
+          bind | if-shell -F '#{window_zoomed_flag}' \
+            'display-message "pane is zoomed: unzoom (prefix z) before splitting"' \
+            "split-window -h -c '#{pane_current_path}'"
+          bind - if-shell -F '#{window_zoomed_flag}' \
+            'display-message "pane is zoomed: unzoom (prefix z) before splitting"' \
+            "split-window -v -c '#{pane_current_path}'"
+          bind \\ if-shell -F '#{window_zoomed_flag}' \
+            'display-message "pane is zoomed: unzoom (prefix z) before splitting"' \
+            "split-window -h -c '#{pane_current_path}' ; resize-pane -R 30"
+          bind % if-shell -F '#{window_zoomed_flag}' \
+            'display-message "pane is zoomed: unzoom (prefix z) before splitting"' \
+            'split-window -h'
+          bind '"' if-shell -F '#{window_zoomed_flag}' \
+            'display-message "pane is zoomed: unzoom (prefix z) before splitting"' \
+            'split-window -v'
 
           bind-key k select-pane -U
           bind-key j select-pane -D

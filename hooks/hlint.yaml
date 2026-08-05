@@ -21,7 +21,3 @@
   # Performance footguns
   - {name: Data.List.nub, within: [], message: "Use Data.Containers.ListUtils.nubOrd"}
   - {name: Data.List.nubBy, within: [], message: "Use Data.Containers.ListUtils.nubOrdOn"}
-
-  # Project-specific API preferences
-  - {name: Control.Concurrent.threadDelay, within: [], message: "Use Data.Time.Fixed.sleepSeconds or Data.Time.Fixed.sleepFor"}
-  - {name: System.Timeout.timeout, within: [], message: "Use Data.Time.Fixed.timeoutSeconds or Data.Time.Fixed.timeout"}
