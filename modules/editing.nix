@@ -388,6 +388,7 @@ in
           vim-cool
           vim-endwise
           vim-eunuch
+          vim-gnupg
           vim-fugitive
           vim-gitgutter
           vim-indent-object
