@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  checkPlatform = p: builtins.elem pkgs.system p.meta.platforms;
+  checkPlatform = p: builtins.elem pkgs.stdenv.hostPlatform.system p.meta.platforms;
   util = (import ./util.nix) { inherit pkgs; };
 in
 {
@@ -20,7 +20,7 @@ in
     homePath = lib.mkOption {
       type = lib.types.path;
       description = "Path of user's home directory.";
-      default = builtins.toPath (if pkgs.stdenv.isDarwin then
+      default = builtins.toPath (if pkgs.stdenv.hostPlatform.isDarwin then
         "/Users/${config.user}"
       else
         "/home/${config.user}");
