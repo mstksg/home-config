@@ -352,6 +352,7 @@ in
 
       programs.tmux = {
         enable = true;
+        mouse = lib.mkDefault true;
         prefix = "C-a";
         baseIndex = 0;
         newSession = false;
@@ -370,6 +371,11 @@ in
           vim-tmux-navigator
         ];
         extraConfig = ''
+          # Preserve Shift/Ctrl/Alt modifiers on arrow and function keys.
+          set -g xterm-keys on
+          set -s extended-keys on
+          set -as terminal-features 'xterm*:extkeys'
+
           # Splitting a zoomed pane silently un-zooms the window, which is never
           # what was intended: refuse instead.
           bind | if-shell -F '#{window_zoomed_flag}' \
