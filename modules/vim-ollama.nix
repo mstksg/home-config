@@ -29,11 +29,11 @@ in
     };
     edit-model = lib.mkOption {
       type = lib.types.str;
-      default = "qwen3-coder:30b";
+      default = "qwen3.8:27b";
     };
     chat-model = lib.mkOption {
       type = lib.types.str;
-      default = "qwen3.5:9b";
+      default = "qwen3.8:27b";
     };
     openai = lib.mkOption {
       type = lib.types.bool;
