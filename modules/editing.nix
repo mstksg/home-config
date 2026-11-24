@@ -231,6 +231,8 @@ let
       '';
 in
 {
+  imports = [ ./vim-ollama.nix ];
+
   options = {
     dhall-lsp-server = lib.mkOption {
       type = lib.types.package;
